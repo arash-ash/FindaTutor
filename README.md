@@ -8,10 +8,11 @@ Introduction
 
 Getting Started
 ---------------
-
+wait till version 1.0!
 
 Screenshots
 -----------
 <img src="app/src/screen.png" height="534" width="300"/>
+
 
 
