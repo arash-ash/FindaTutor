@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "202889185515",
+    "firebase_url": "https://tutoring-ads-a6476.firebaseio.com",
+    "project_id": "tutoring-ads-a6476",
+    "storage_bucket": "tutoring-ads-a6476.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202889185515:android:ce0fb09f9a32d8c9",
+        "android_client_info": {
+          "package_name": "edu.bilkent.findatutor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202889185515-18hk112inbi32trcmdcs1mb022vst41h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.bilkent.findatutor",
+            "certificate_hash": "7EE40AD42DD1F40E1FDE7FEDEC913A177696C646"
+          }
+        },
+        {
+          "client_id": "202889185515-3764or1d6gndld9137ou7pgi74kagkcu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHyVrPdfYhRR0WYwgFf1YuS76osP2yKaE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202889185515-3764or1d6gndld9137ou7pgi74kagkcu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
