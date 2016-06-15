@@ -13,4 +13,17 @@
     <string name="hint_password">password</string>
     <string name="hint_email">email</string>
     <string name="sign_in">Sign In</string>
+    <string name="title_activity_main2">Find a Tutor</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="NavDrawer_option1">Import</string>
+    <string name="NavDrawer_option2">Gallery</string>
+    <string name="NavDrawer_option3">Slideshow</string>
+    <string name="NavDrawer_option4">Tools</string>
+    <string name="NavDrawer_option5">Share</string>
+    <string name="NavDrawer_option6">Send</string>
+    <string name="NavDrawer_group">Communicate</string>
+    <string name="NavDrawer_Banner_Title1">Arash Ash</string>
+    <string name="NavDrawer_Banner_Title2">Bilkent University</string>
 </resources>
