@@ -14,6 +14,7 @@ Screenshots
 -----------
 <img src="app/src/LoginScreen.png" height="534" width="300"/>
 <img src="app/src/RecentAdView.png" height="534" width="300"/>
+<img src="app/src/AddingAd.png" height="534" width="300"/>
 <img src="app/src/TopAdView.png" height="534" width="300"/>
 <img src="app/src/NavigationDrawer.png" height="534" width="300"/>
 <img src="app/src/Comments.png" height="534" width="300"/>
