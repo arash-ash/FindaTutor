@@ -7,16 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.bilkent.findatutor.SignInActivity">
+    tools:context="edu.bilkent.findatutor.SignInActivity"
+    android:background="@drawable/background1">
 
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:src="@drawable/findatutor_lockup_500" />
+        android:src="@drawable/findatutor_lockup_500"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/field_email"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <LinearLayout
         android:id="@+id/layout_email_password"
@@ -25,26 +30,6 @@
         android:layout_below="@+id/icon"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/field_email"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center_horizontal"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
-            android:maxLines="1" />
-
-        <EditText
-            android:id="@+id/field_password"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center_horizontal"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword"
-            android:maxLines="1" />
 
     </LinearLayout>
 
@@ -56,20 +41,69 @@
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button_sign_in"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_in" />
-
-
-        <Button
-            android:id="@+id/button_sign_up"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_up" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/button_sign_in"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_in"
+        android:background="@color/colorAccent"
+        android:layout_below="@+id/field_password"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/button_sign_up"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:background="@drawable/rounded_button"
+        android:layout_below="@+id/button_sign_in"
+        android:layout_alignLeft="@+id/button_sign_in"
+        android:layout_alignStart="@+id/button_sign_in"
+        android:layout_marginTop="59dp" />
+
+    <Button
+        android:id="@+id/button_forgot"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password"
+        android:background="@drawable/rounded_button"
+        android:layout_below="@+id/button_sign_up"
+        android:layout_alignLeft="@+id/button_sign_up"
+        android:layout_alignStart="@+id/button_sign_up" />
+
+    <EditText
+        android:id="@+id/field_password"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/field_email"
+        android:layout_alignStart="@+id/field_email"
+        android:layout_alignRight="@+id/field_email"
+        android:layout_alignEnd="@+id/field_email"
+        android:textAlignment="textStart" />
+
+    <EditText
+        android:id="@+id/field_email"
+        android:layout_width="227dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:layout_above="@+id/field_password"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="textStart" />
+
+
 
 
 </RelativeLayout>
