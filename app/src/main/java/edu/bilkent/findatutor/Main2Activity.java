@@ -78,9 +78,6 @@ public class Main2Activity extends AppCompatActivity
 
 
 
-
-
-
         // Create the adapter that will return a fragment for each section
         mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             private final Fragment[] mFragments = new Fragment[] {
@@ -89,9 +86,9 @@ public class Main2Activity extends AppCompatActivity
                     new MyTopPostsFragment(),
             };
             private final String[] mFragmentNames = new String[] {
-                    "Ads",
+                    "Offered",
                     "My Ads",
-                    "My Top Ads"
+                    "Requested"
             };
             @Override
             public Fragment getItem(int position) {
@@ -131,30 +128,41 @@ public class Main2Activity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+// // for the action bar
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main2, menu);
+//        return true;
+//    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main2, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_logout) {
+//            FirebaseAuth.getInstance().signOut();
+//            startActivity(new Intent(this, SignInActivity.class));
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+// // for the xml file
+//    <?xml version="1.0" encoding="utf-8"?>
+//    <menu xmlns:android="http://schemas.android.com/apk/res/android"
+//    xmlns:app="http://schemas.android.com/apk/res-auto">
+//    <item
+//    android:id="@+id/action_logout"
+//    android:orderInCategory="100"
+//    android:title="@string/menu_logout"
+//    app:showAsAction="never" />
+//    </menu>
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_logout) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, SignInActivity.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -162,18 +170,23 @@ public class Main2Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_ads) {
+        } else if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_notfications) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_messages) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_sessions) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_statistics) {
 
+        } else if (id == R.id.nav_settings) {
+
+
+        } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(this, SignInActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -88,7 +88,7 @@
         android:layout_alignStart="@+id/field_email"
         android:layout_alignRight="@+id/field_email"
         android:layout_alignEnd="@+id/field_email"
-        android:textAlignment="textStart" />
+        android:textAlignment="textStart"/>
 
     <EditText
         android:id="@+id/field_email"

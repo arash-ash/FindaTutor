@@ -17,14 +17,17 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="NavDrawer_option1">Import</string>
-    <string name="NavDrawer_option2">Gallery</string>
-    <string name="NavDrawer_option3">Slideshow</string>
-    <string name="NavDrawer_option4">Tools</string>
-    <string name="NavDrawer_option5">Share</string>
-    <string name="NavDrawer_option6">Send</string>
-    <string name="NavDrawer_group">Communicate</string>
+    <string name="NavDrawer_option0">Ads</string>
+    <string name="NavDrawer_option1">Profile</string>
+    <string name="NavDrawer_option2">Notifications</string>
+    <string name="NavDrawer_option3">Messages</string>
+    <string name="NavDrawer_option4">Sessions</string>
+    <string name="NavDrawer_option5">Statistics</string>
+    <string name="NavDrawer_option6">Settings</string>
+    <string name="NavDrawer_option7">Log out</string>
+    <string name="NavDrawer_group">Application</string>
     <string name="NavDrawer_Banner_Title1">Arash Ash</string>
     <string name="NavDrawer_Banner_Title2">Bilkent University</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="search_hint">search for courses, names or places</string>
 </resources>
