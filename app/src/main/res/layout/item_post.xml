@@ -21,37 +21,69 @@
             android:id="@+id/star_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/post_author_layout"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/post_author_layout"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:background="?attr/selectableItemBackground"
-                android:src="@drawable/ic_toggle_star_outline_24" />
-
-            <TextView
-                android:id="@+id/post_num_stars"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                tools:text="7" />
-
         </LinearLayout>
+
 
         <include layout="@layout/include_post_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/post_author_layout"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp" />
+            android:id="@+id/include"
+            android:layout_below="@+id/post_author_layout"
+            android:layout_toStartOf="@+id/rating"
+            android:layout_toLeftOf="@+id/rating" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:numStars="5"
+            android:stepSize="0.1"
+            android:isIndicator="true"
+            android:layout_alignTop="@+id/star_layout"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/post_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Bilkent Univ"
+            android:layout_alignTop="@+id/include"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/rating"
+            android:layout_alignStart="@+id/rating"
+            android:gravity="right" />
+
+        <TextView
+            android:id="@+id/post_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="30 TL/hour"
+            android:layout_below="@+id/post_school"
+            android:layout_alignRight="@+id/rating"
+            android:layout_alignEnd="@+id/rating" />
+
+        <TextView
+            android:id="@+id/post_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="English"
+            android:gravity="right"
+            android:layout_below="@+id/post_price"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 

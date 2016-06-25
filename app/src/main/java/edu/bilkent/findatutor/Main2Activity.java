@@ -3,8 +3,6 @@ package edu.bilkent.findatutor;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,14 +14,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.bilkent.findatutor.fragment.MyPostsFragment;
-import edu.bilkent.findatutor.fragment.MyTopPostsFragment;
 import edu.bilkent.findatutor.fragment.RecentPostsFragment;
+import edu.bilkent.findatutor.fragment.RecentRequestedPostsFragment;
 
 public class Main2Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +36,7 @@ public class Main2Activity extends AppCompatActivity
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
             mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getString(R.string.loading_message));
         }
 
         mProgressDialog.show();
@@ -83,12 +80,12 @@ public class Main2Activity extends AppCompatActivity
             private final Fragment[] mFragments = new Fragment[] {
                     new RecentPostsFragment(),
                     new MyPostsFragment(),
-                    new MyTopPostsFragment(),
+                    new RecentRequestedPostsFragment(),
             };
             private final String[] mFragmentNames = new String[] {
-                    "Offered",
-                    "My Ads",
-                    "Requested"
+                    getString(R.string.tab_name_1),
+                    getString(R.string.tab_name_2),
+                    getString(R.string.tab_name_3)
             };
             @Override
             public Fragment getItem(int position) {
