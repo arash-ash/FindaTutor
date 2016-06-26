@@ -36,14 +36,15 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/include"
             android:layout_below="@+id/post_author_layout"
-            android:layout_toStartOf="@+id/post_school" />
+            android:layout_toStartOf="@+id/post_school"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:id="@+id/post_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Bilkent Univ"
+            android:text="Bilkent University"
             android:gravity="right"
             android:layout_alignTop="@+id/include"
             android:layout_alignParentRight="true"
@@ -72,14 +73,14 @@
             android:layout_alignParentEnd="true" />
 
         <TextView
+            android:id="@+id/post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="29 June"
-            android:id="@+id/textView2"
-            android:layout_above="@+id/include"
-            android:layout_alignLeft="@+id/post_price"
-            android:layout_alignStart="@+id/post_price" />
+            android:layout_alignBottom="@+id/post_author_layout"
+            android:layout_alignRight="@+id/star_layout"
+            android:layout_alignEnd="@+id/star_layout" />
 
     </RelativeLayout>
 

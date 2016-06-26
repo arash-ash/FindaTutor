@@ -36,14 +36,14 @@
     <string name="loading_message">Loading...</string>
 
     <string-array name="languages_array">
-        <item>Languages</item>
+        <item>Language</item>
         <item>English</item>
         <item>Farsi</item>
         <item>Turkish</item>
     </string-array>
 
     <string-array name="subjects_array">
-        <item>Subjects...</item>
+        <item>Subject</item>
         <item>Math</item>
         <item>Physics</item>
         <item>Chemistry</item>
@@ -60,6 +60,7 @@
 
 
     <string-array name="schools_array">
+            <item>School</item>
             <item>Any School</item>
             <item>Ankara Univ</item>
             <item>Bilkent</item>

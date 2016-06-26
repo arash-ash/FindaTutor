@@ -18,6 +18,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
     public TextView priceView;
     public TextView languageView;
     public TextView schoolView;
+    public TextView dateView;
 
     public RequestedPostViewHolder(View itemView) {
         super(itemView);
@@ -31,7 +32,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
         priceView = (TextView) itemView.findViewById(R.id.post_price);
         languageView = (TextView) itemView.findViewById(R.id.post_language);
         schoolView = (TextView) itemView.findViewById(R.id.post_school);
-
+        dateView = (TextView) itemView.findViewById(R.id.post_date);
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener) {
@@ -44,6 +45,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
         priceView.setText(post.price);
         languageView.setText(post.language);
         schoolView.setText(post.school);
+        dateView.setText(post.date);
 
         //starView.setOnClickListener(starClickListener);
     }

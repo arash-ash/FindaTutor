@@ -20,6 +20,7 @@ public class Post {
     public String school;
     public String price;
     public String date;
+    public boolean isRequested;
 
     public int starCount = 0;
     public int sessions;
@@ -32,7 +33,8 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(String uid, String author, String title, String body, String subject, String language, String school, String price) {
+    public Post(String uid, String author, String title, String body, String subject,
+                String language, String school, String price, String date) {
         this.uid = uid;
         this.author = author;
         this.title = title;
@@ -41,7 +43,7 @@ public class Post {
         this.language = language;
         this.school = school;
         this.price = price;
-        date = "29 June";
+        this.date = date;
     }
 
     // [START post_to_map]
@@ -57,6 +59,7 @@ public class Post {
         result.put("language", language);
         result.put("school", school);
         result.put("price", price);
+        result.put("date", date);
 
         return result;
     }

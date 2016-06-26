@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class NewPostActivity extends BaseActivity {
     private Spinner spinner2;
     private Spinner spinner3;
     private EditText mPriceField;
+    private  EditText mDateField;
+    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,9 @@ public class NewPostActivity extends BaseActivity {
         setContentView(R.layout.activity_new_post);
 
 
-        spinner1 = (Spinner) findViewById(R.id.subject_spinner);
-        spinner2 = (Spinner) findViewById(R.id.school_spinner);
-        spinner3 = (Spinner) findViewById(R.id.language_spinner);
+        spinner1 = (Spinner) findViewById(R.id.spinner_subject);
+        spinner2 = (Spinner) findViewById(R.id.spinner_school);
+        spinner3 = (Spinner) findViewById(R.id.spinner_language);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
@@ -69,7 +72,9 @@ public class NewPostActivity extends BaseActivity {
 
         mTitleField = (EditText) findViewById(R.id.field_title);
         mBodyField = (EditText) findViewById(R.id.field_body);
-        mPriceField = (EditText) findViewById(R.id.price);
+        mPriceField = (EditText) findViewById(R.id.field_price);
+        mDateField = (EditText) findViewById(R.id.field_date);
+
 
         findViewById(R.id.fab_submit_post).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +91,7 @@ public class NewPostActivity extends BaseActivity {
         final String school = spinner2.getSelectedItem().toString();
         final String language = spinner3.getSelectedItem().toString();
         final String price = mPriceField.getText().toString();
+        final String date = mDateField.getText().toString();
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
@@ -124,7 +130,7 @@ public class NewPostActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(userId, user.username, title, body, subject, language, "For " + school, price);
+                            writeNewPost(userId, user.username, title, body, subject, language, "For " + school, price, date);
                         }
 
                         // Finish this Activity, back to the stream
@@ -141,15 +147,25 @@ public class NewPostActivity extends BaseActivity {
     }
 
     // [START write_fan_out]
-    private void writeNewPost(String userId, String username, String title, String body, String subject, String language, String school, String price) {
+    private void writeNewPost(String userId, String username, String title, String body, String subject, String language, String school, String price, String date) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
-        Post post = new Post(userId, username, title, body, subject, language, school, price);
+
+        Post post = new Post(userId, username, title, body, subject, language, school, price, date);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/posts/" + key, postValues);
+
+
+
+        if (date.equals("")) {
+            childUpdates.put("/posts/" + key, postValues);
+        }
+        else {
+            childUpdates.put("/posts-requested/" + key, postValues);
+        }
+
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);

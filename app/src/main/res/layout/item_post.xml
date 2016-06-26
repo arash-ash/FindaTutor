@@ -36,8 +36,8 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/include"
             android:layout_below="@+id/post_author_layout"
-            android:layout_toStartOf="@+id/rating"
-            android:layout_toLeftOf="@+id/rating" />
+            android:layout_toLeftOf="@+id/post_school"
+            android:layout_toStartOf="@+id/post_school" />
 
         <RatingBar
             android:id="@+id/rating"
@@ -47,22 +47,19 @@
             android:numStars="5"
             android:stepSize="0.1"
             android:isIndicator="true"
-            android:layout_alignTop="@+id/star_layout"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/star_layout" />
 
         <TextView
             android:id="@+id/post_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Bilkent Univ"
+            android:text="Bilkent University"
+            android:gravity="right"
             android:layout_alignTop="@+id/include"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignLeft="@+id/rating"
-            android:layout_alignStart="@+id/rating"
-            android:gravity="right" />
+            android:layout_alignRight="@+id/post_price"
+            android:layout_alignEnd="@+id/post_price" />
 
         <TextView
             android:id="@+id/post_price"
@@ -71,8 +68,11 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="30 TL/hour"
             android:layout_below="@+id/post_school"
-            android:layout_alignRight="@+id/rating"
-            android:layout_alignEnd="@+id/rating" />
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:gravity="right"
+            android:layout_alignLeft="@+id/rating"
+            android:layout_alignStart="@+id/rating" />
 
         <TextView
             android:id="@+id/post_language"
@@ -83,7 +83,9 @@
             android:gravity="right"
             android:layout_below="@+id/post_price"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/include"
+            android:layout_toEndOf="@+id/include" />
 
     </RelativeLayout>
 
