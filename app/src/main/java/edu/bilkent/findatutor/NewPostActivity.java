@@ -135,7 +135,7 @@ public class NewPostActivity extends BaseActivity {
         }
 
 
-        // [START single_value_read]
+
         final String userId = getUid();
         mDatabase.child("users").child(userId).addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -144,7 +144,7 @@ public class NewPostActivity extends BaseActivity {
                         // Get user value
                         User user = dataSnapshot.getValue(User.class);
 
-                        // [START_EXCLUDE]
+
                         if (user == null) {
                             // User is null, error out
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
@@ -158,7 +158,7 @@ public class NewPostActivity extends BaseActivity {
 
                         // Finish this Activity, back to the stream
                         finish();
-                        // [END_EXCLUDE]
+
                     }
 
                     @Override
@@ -166,10 +166,10 @@ public class NewPostActivity extends BaseActivity {
                         Log.w(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
-        // [END single_value_read]
+
     }
 
-    // [START write_fan_out]
+
     private void writeNewPost(String userId, String username, String title, String body, String subject, String language, String school, String price, String date) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously

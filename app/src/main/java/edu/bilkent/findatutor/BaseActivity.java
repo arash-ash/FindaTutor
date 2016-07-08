@@ -13,7 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
-public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private ProgressDialog mProgressDialog;
 
@@ -36,6 +36,9 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
+    public String getEmail() {
+        return FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    }
 
 
 
@@ -46,6 +49,8 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_ads) {
+            startActivity(new Intent(this, AdsActivity.class));
+
         } else if (id == R.id.nav_profile) {
 
         } else if (id == R.id.nav_notfications) {

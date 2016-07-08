@@ -22,7 +22,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".AdsActivity"
             android:label="@string/title_activity_main">
         </activity>
 
@@ -38,6 +38,13 @@
             android:label="@string/title_activity_post_detail">
         </activity>
 
+        <activity
+            android:name=".ChatActivity">
+        </activity>
+
+        <activity
+            android:name=".MessagesActivity">
+        </activity>
 
 
     </application>

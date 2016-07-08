@@ -2,7 +2,6 @@ package edu.bilkent.findatutor.models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
-// [START comment_class]
 @IgnoreExtraProperties
 public class Comment {
 
@@ -21,4 +20,4 @@ public class Comment {
     }
 
 }
-// [END comment_class]
+

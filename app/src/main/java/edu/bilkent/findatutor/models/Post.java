@@ -3,7 +3,6 @@ package edu.bilkent.findatutor.models;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,9 +19,8 @@ public class Post {
     public String price;
     public String date;
 
-    public int starCount = 0;
-    public int sessions;
-    public int views;
+    public int viewsCount = 0;
+    public int sessionsCount = 0;
     public float rating;
     public Map<String, Boolean> stars = new HashMap<>();
 
@@ -52,7 +50,7 @@ public class Post {
         result.put("author", author);
         result.put("title", title);
         result.put("body", body);
-        result.put("starCount", starCount);
+        result.put("viewsCount", viewsCount);
         result.put("subject", subject);
         result.put("language", language);
         result.put("school", school);

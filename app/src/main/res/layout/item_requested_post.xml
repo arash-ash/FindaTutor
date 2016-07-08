@@ -36,11 +36,11 @@
             android:layout_marginLeft="5dp"
             android:id="@+id/include"
             android:layout_below="@+id/post_author_layout"
-            android:layout_toStartOf="@+id/post_school"
+            android:layout_toStartOf="@+id/course_title"
             android:layout_marginRight="5dp" />
 
         <TextView
-            android:id="@+id/post_school"
+            android:id="@+id/course_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="30 TL/hour"
-            android:layout_below="@+id/post_school"
+            android:layout_below="@+id/course_title"
             android:layout_alignRight="@+id/post_language"
             android:layout_alignEnd="@+id/post_language" />
 

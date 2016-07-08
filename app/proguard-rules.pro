@@ -19,7 +19,7 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 
--keep class edu.bilkent.findatutor.viewholder.** {
+-keep class viewholders.** {
     *;
 }
 
