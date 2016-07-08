@@ -13,7 +13,10 @@
     <string name="hint_password">******</string>
     <string name="hint_email">E-mail address</string>
     <string name="sign_in">Sign In</string>
-    <string name="title_activity_main2">Find a Tutor</string>
+    <string name="title_activity_main">Ads</string>
+    <string name="title_activity_new_post">Create Ad</string>
+    <string name="title_activity_post_detail">Ad Details</string>
+    <string name="title_activity_messages">Messages</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -34,6 +37,11 @@
     <string name="tab_name_2">My Ads</string>
     <string name="tab_name_3">Requested</string>
     <string name="loading_message">Loading...</string>
+    <string name="course_title_hint">Course Title</string>
+    <string name="description_hint">Description</string>
+    <string name="tl_hour_rate">TL/hour</string>
+    <string name="price_label">Price:</string>
+    <string name="request_date_hint">Request Date:</string>
 
     <string-array name="languages_array">
         <item>Language</item>

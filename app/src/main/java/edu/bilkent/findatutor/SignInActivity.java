@@ -3,6 +3,8 @@ package edu.bilkent.findatutor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -122,7 +124,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         writeNewUser(user.getUid(), username, user.getEmail());
 
         // Go to MainActivity
-        startActivity(new Intent(SignInActivity.this, Main2Activity.class));
+        startActivity(new Intent(SignInActivity.this, MainActivity.class));
         finish();
     }
 
@@ -172,4 +174,10 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 break;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+            super.onBackPressed();
+    }
+
 }

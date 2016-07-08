@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-// [START post_class]
 @IgnoreExtraProperties
 public class Post {
 
@@ -20,7 +19,6 @@ public class Post {
     public String school;
     public String price;
     public String date;
-    public boolean isRequested;
 
     public int starCount = 0;
     public int sessions;
@@ -46,7 +44,7 @@ public class Post {
         this.date = date;
     }
 
-    // [START post_to_map]
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -63,7 +61,7 @@ public class Post {
 
         return result;
     }
-    // [END post_to_map]
+
 
 }
-// [END post_class]
+
