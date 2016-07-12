@@ -137,18 +137,11 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
 
             int sdk = Build.VERSION.SDK_INT;
             if (message.getSender().equals(getEmail())){
-                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-                    nameView.setBackground(getDrawable(R.drawable.bubble_right_green));
-                } else{
-                    nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_right_green));
-                }
+                nameView.setBackgroundResource(R.drawable.bubble_right_green);
+
                 layoutParams.gravity = Gravity.RIGHT;
             }else{
-                if (sdk >= Build.VERSION_CODES.JELLY_BEAN) {
-                    nameView.setBackground(getDrawable(R.drawable.bubble_left_gray));
-                } else{
-                    nameView.setBackgroundDrawable(getDrawable(R.drawable.bubble_left_gray));
-                }
+                nameView.setBackgroundResource(R.drawable.bubble_left_gray);
                 layoutParams.gravity = Gravity.LEFT;
             }
 
