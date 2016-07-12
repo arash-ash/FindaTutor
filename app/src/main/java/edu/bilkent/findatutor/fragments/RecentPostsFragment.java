@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -22,6 +21,8 @@ import edu.bilkent.findatutor.R;
 import edu.bilkent.findatutor.models.Chat;
 import edu.bilkent.findatutor.models.Post;
 import edu.bilkent.findatutor.viewholders.PostViewHolder;
+
+import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
 public class RecentPostsFragment extends Fragment {
 
@@ -88,6 +89,7 @@ public class RecentPostsFragment extends Fragment {
                 });
 
 
+
                 // Bind Post to ViewHolder,
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
@@ -106,11 +108,11 @@ public class RecentPostsFragment extends Fragment {
 
     public String getUid() {
 
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        return getInstance().getCurrentUser().getUid();
     }
 
     public String getName() {
-        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String email = getInstance().getCurrentUser().getEmail();
         return usernameFromEmail(email);
     }
 
