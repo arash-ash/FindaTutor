@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import edu.bilkent.findatutor.models.User;
+import edu.bilkent.findatutor.model.User;
 
 public class SignInActivity extends BaseActivity implements View.OnClickListener {
 

@@ -11,23 +11,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
-import edu.bilkent.findatutor.models.Chat;
-import edu.bilkent.findatutor.models.Message;
-import edu.bilkent.findatutor.models.Post;
+import edu.bilkent.findatutor.model.Message;
 
 /**
  * Created by linus on 08.07.2016.
  */
 
 public class MessageSource {
-    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private static final String TAG = "MessageSource";
     private static final String COLUMN_TEXT = "text";
     private static final String COLUMN_SENDER = "sender";
-
+    private static DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
 
     public static void saveMessage(Message message, String uid, String postKey, String email){
         Date date = message.getDate();
@@ -68,6 +64,10 @@ public class MessageSource {
         mDatabase.removeEventListener(listener);
     }
 
+    public interface MessagesCallbacks {
+        void onMessageAdded(Message message);
+    }
+
     public static class MessagesListener implements ChildEventListener {
         private MessagesCallbacks callbacks;
         MessagesListener(MessagesCallbacks callbacks){
@@ -99,10 +99,5 @@ public class MessageSource {
 
         @Override
         public void onCancelled(DatabaseError databaseError) {}
-    }
-
-
-    public interface MessagesCallbacks{
-        public void onMessageAdded(Message message);
     }
 }

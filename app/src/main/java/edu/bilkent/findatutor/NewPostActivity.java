@@ -23,8 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.bilkent.findatutor.models.Post;
-import edu.bilkent.findatutor.models.User;
+import edu.bilkent.findatutor.model.Post;
+import edu.bilkent.findatutor.model.User;
 
 public class NewPostActivity extends BaseActivity {
 
@@ -153,7 +153,7 @@ public class NewPostActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(userId, user.username, title, body, subject, language, "For " + school, price, date);
+                            writeNewPost(userId, user.getUsername(), title, body, subject, language, "For " + school, price, date);
                         }
 
                         // Finish this Activity, back to the stream

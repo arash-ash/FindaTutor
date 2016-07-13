@@ -18,8 +18,8 @@ import java.util.Map;
 
 import edu.bilkent.findatutor.ChatActivity;
 import edu.bilkent.findatutor.R;
-import edu.bilkent.findatutor.models.Chat;
-import edu.bilkent.findatutor.models.Post;
+import edu.bilkent.findatutor.model.Chat;
+import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.PostViewHolder;
 
 import static com.google.firebase.auth.FirebaseAuth.getInstance;

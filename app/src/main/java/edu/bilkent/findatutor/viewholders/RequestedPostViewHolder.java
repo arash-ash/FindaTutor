@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import edu.bilkent.findatutor.R;
-import edu.bilkent.findatutor.models.Post;
+import edu.bilkent.findatutor.model.Post;
 
 public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
 

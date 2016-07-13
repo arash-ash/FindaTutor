@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import edu.bilkent.findatutor.R;
-import edu.bilkent.findatutor.models.Chat;
+import edu.bilkent.findatutor.model.Chat;
 
 /**
  * Created by linus on 09.07.2016.
@@ -27,7 +27,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 
 
     public void bindToPost(Chat chat, View.OnClickListener clickListener) {
-        titleView.setText(chat.title);
-        senderView.setText(chat.sender);
+        titleView.setText(chat.getTitle());
+        senderView.setText(chat.getSender());
     }
 }

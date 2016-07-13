@@ -23,6 +23,6 @@
     *;
 }
 
--keepclassmembers class edu.bilkent.findatutor.models.** {
+-keepclassmembers class model.** {
     *;
 }

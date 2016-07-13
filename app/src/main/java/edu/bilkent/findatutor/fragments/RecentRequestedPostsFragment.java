@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import edu.bilkent.findatutor.R;
-import edu.bilkent.findatutor.models.Post;
+import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.RequestedPostViewHolder;
 
 public class RecentRequestedPostsFragment extends Fragment {

@@ -17,9 +17,8 @@ import com.google.firebase.database.Query;
 
 import edu.bilkent.findatutor.ChatActivity;
 import edu.bilkent.findatutor.MessagesActivity;
-import edu.bilkent.findatutor.PostDetailActivity;
 import edu.bilkent.findatutor.R;
-import edu.bilkent.findatutor.models.Post;
+import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.RequestedPostViewHolder;
 
 public class MyPostsFragment extends Fragment {

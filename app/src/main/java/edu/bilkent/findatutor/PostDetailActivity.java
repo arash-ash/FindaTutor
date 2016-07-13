@@ -27,16 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.bilkent.findatutor.models.Comment;
-import edu.bilkent.findatutor.models.Post;
-import edu.bilkent.findatutor.models.User;
+import edu.bilkent.findatutor.model.Post;
+import edu.bilkent.findatutor.model.Review;
+import edu.bilkent.findatutor.model.User;
 
 public class PostDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private static final String TAG = "PostDetailActivity";
-
     public static final String EXTRA_POST_KEY = "post_key";
-
+    private static final String TAG = "PostDetailActivity";
     private DatabaseReference mPostReference;
     private DatabaseReference mCommentsReference;
     private ValueEventListener mPostListener;
@@ -166,14 +164,14 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         // Get user information
                         User user = dataSnapshot.getValue(User.class);
-                        String authorName = user.username;
+                        String authorName = user.getUsername();
 
-                        // Create new comment object
+                        // Create new review object
                         String commentText = mCommentField.getText().toString();
-                        Comment comment = new Comment(uid, authorName, commentText);
+                        Review review = new Review(uid, authorName, commentText);
 
-                        // Push the comment, it will appear in the list
-                        mCommentsReference.push().setValue(comment);
+                        // Push the review, it will appear in the list
+                        mCommentsReference.push().setValue(review);
 
                         // Clear the field
                         mCommentField.setText(null);
@@ -206,7 +204,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         private ChildEventListener mChildEventListener;
 
         private List<String> mCommentIds = new ArrayList<>();
-        private List<Comment> mComments = new ArrayList<>();
+        private List<Review> mReviews = new ArrayList<>();
 
         public CommentAdapter(final Context context, DatabaseReference ref) {
             mContext = context;
@@ -219,14 +217,14 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 public void onChildAdded(DataSnapshot dataSnapshot, String previousChildName) {
                     Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
 
-                    // A new comment has been added, add it to the displayed list
-                    Comment comment = dataSnapshot.getValue(Comment.class);
+                    // A new review has been added, add it to the displayed list
+                    Review review = dataSnapshot.getValue(Review.class);
 
                     // [START_EXCLUDE]
                     // Update RecyclerView
                     mCommentIds.add(dataSnapshot.getKey());
-                    mComments.add(comment);
-                    notifyItemInserted(mComments.size() - 1);
+                    mReviews.add(review);
+                    notifyItemInserted(mReviews.size() - 1);
                     // [END_EXCLUDE]
                 }
 
@@ -236,14 +234,14 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
                     // A comment has changed, use the key to determine if we are displaying this
                     // comment and if so displayed the changed comment.
-                    Comment newComment = dataSnapshot.getValue(Comment.class);
+                    Review newReview = dataSnapshot.getValue(Review.class);
                     String commentKey = dataSnapshot.getKey();
 
                     // [START_EXCLUDE]
                     int commentIndex = mCommentIds.indexOf(commentKey);
                     if (commentIndex > -1) {
                         // Replace with the new data
-                        mComments.set(commentIndex, newComment);
+                        mReviews.set(commentIndex, newReview);
 
                         // Update the RecyclerView
                         notifyItemChanged(commentIndex);
@@ -266,7 +264,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                     if (commentIndex > -1) {
                         // Remove data from the list
                         mCommentIds.remove(commentIndex);
-                        mComments.remove(commentIndex);
+                        mReviews.remove(commentIndex);
 
                         // Update the RecyclerView
                         notifyItemRemoved(commentIndex);
@@ -282,7 +280,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
                     // A comment has changed position, use the key to determine if we are
                     // displaying this comment and if so move it.
-                    Comment movedComment = dataSnapshot.getValue(Comment.class);
+                    Review movedReview = dataSnapshot.getValue(Review.class);
                     String commentKey = dataSnapshot.getKey();
 
                     // ...
@@ -311,14 +309,14 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
         @Override
         public void onBindViewHolder(CommentViewHolder holder, int position) {
-            Comment comment = mComments.get(position);
-            holder.authorView.setText(comment.author);
-            holder.bodyView.setText(comment.text);
+            Review review = mReviews.get(position);
+            holder.authorView.setText(review.getAuthor());
+            holder.bodyView.setText(review.getText());
         }
 
         @Override
         public int getItemCount() {
-            return mComments.size();
+            return mReviews.size();
         }
 
         public void cleanupListener() {

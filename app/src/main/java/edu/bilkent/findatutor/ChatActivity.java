@@ -20,7 +20,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Date;
 
-import edu.bilkent.findatutor.models.Message;
+import edu.bilkent.findatutor.model.Message;
 
 /**
  * Created by linus on 08.07.2016.

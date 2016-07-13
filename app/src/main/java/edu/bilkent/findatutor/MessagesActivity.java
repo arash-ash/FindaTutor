@@ -1,6 +1,5 @@
 package edu.bilkent.findatutor;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -15,10 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import edu.bilkent.findatutor.models.Chat;
-import edu.bilkent.findatutor.models.Post;
+import edu.bilkent.findatutor.model.Chat;
 import edu.bilkent.findatutor.viewholders.MessageViewHolder;
-import edu.bilkent.findatutor.viewholders.PostViewHolder;
 
 /**
  * Created by linus on 08.07.2016.
