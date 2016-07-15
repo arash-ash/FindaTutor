@@ -29,141 +29,129 @@
         </android.support.design.widget.AppBarLayout>
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
 
 
+            <Spinner
+                android:id="@+id/spinner_subject"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="60dp" />
+
+            <EditText
+                android:id="@+id/field_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_subject"
+                android:hint="@string/course_title_hint"
+                android:maxLines="1" />
+
+            <EditText
+                android:id="@+id/field_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/field_title"
+                android:hint="@string/description_hint"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollHorizontally="false" />
 
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_submit_post"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_navigation_check_24" />
 
+            <Spinner
+                android:id="@+id/spinner_school"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_language" />
 
+            <Spinner
+                android:id="@+id/spinner_language"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true" />
 
+            <EditText
+                android:id="@+id/field_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView3"
+                android:layout_alignBottom="@+id/textView3"
+                android:layout_alignEnd="@+id/fab_submit_post"
+                android:layout_alignRight="@+id/fab_submit_post"
+                android:layout_toEndOf="@+id/textView3"
+                android:layout_toRightOf="@+id/textView3"
+                android:gravity="right"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollHorizontally="false"
+                android:text="@string/tl_hour_rate" />
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.bilkent.findatutor.NewPostActivity">
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/field_body"
+                android:layout_marginLeft="29dp"
+                android:layout_marginStart="29dp"
+                android:text="@string/price_label"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <EditText
+                android:id="@+id/field_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/fab_submit_post"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:hint="@string/request_date_hint"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollHorizontally="false" />
 
-    <Spinner
-        android:id="@+id/spinner_subject"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="60dp" />
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/field_date"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:checked="false"
+                android:onClick="onCheckboxClicked"
+                android:text="is this a requested ad?" />
 
-    <EditText
-        android:id="@+id/field_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/course_title_hint"
-        android:maxLines="1"
-        android:layout_below="@+id/spinner_subject"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/field_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/description_hint"
-        android:inputType="textMultiLine"
-        android:maxLines="10"
-        android:scrollHorizontally="false"
-        android:layout_below="@+id/field_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_submit_post"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_navigation_check_24"/>
-
-    <Spinner
-        android:id="@+id/spinner_school"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_language"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:id="@+id/spinner_language"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/field_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:maxLines="10"
-        android:scrollHorizontally="false"
-        android:text="@string/tl_hour_rate"
-        android:gravity="right"
-        android:layout_alignBaseline="@+id/textView3"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignRight="@+id/fab_submit_post"
-        android:layout_alignEnd="@+id/fab_submit_post"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/price_label"
-        android:id="@+id/textView3"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
-        android:layout_below="@+id/field_body"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/field_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/request_date_hint"
-        android:inputType="textMultiLine"
-        android:maxLines="10"
-        android:scrollHorizontally="false"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Leave this field empty for offered ads!"
-        android:id="@+id/textView2"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/spinner_school"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
-
+        </RelativeLayout>
 
 
 
 
     </android.support.design.widget.CoordinatorLayout>
-
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

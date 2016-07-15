@@ -33,7 +33,7 @@ public class Post {
     }
 
     public Post(String uid, String author, String title, String body, String subject,
-                String language, String school, String price, String date) {
+                String language, String school, String price, String date, boolean isRequested) {
         this.uid = uid;
         this.author = author;
         this.title = title;
@@ -44,7 +44,7 @@ public class Post {
         this.price = price;
         this.sessionDate = date;
         createdDate = sDateFormat.format(new Date());
-        this.isRequested = false;
+        this.isRequested = isRequested;
     }
 
 

@@ -1,5 +1,6 @@
 package edu.bilkent.findatutor;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -20,7 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import edu.bilkent.findatutor.model.Post;
@@ -40,7 +45,7 @@ public class NewPostActivity extends BaseActivity {
     private Spinner spinner3;
     private EditText mPriceField;
     private EditText mDateField;
-    private CheckBox checkBox;
+    private boolean isRequested;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +66,6 @@ public class NewPostActivity extends BaseActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
-
-
-
-
 
 
         spinner1 = (Spinner) findViewById(R.id.spinner_subject);
@@ -105,7 +106,57 @@ public class NewPostActivity extends BaseActivity {
                 submitPost();
             }
         });
+
+
+        final Calendar myCalendar = Calendar.getInstance();
+
+        final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+            private void updateLabel() {
+
+                String myFormat = "MM/dd/yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                mDateField.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
+        mDateField.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(NewPostActivity.this, datePicker, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
     }
+
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+        isRequested = checked;
+        if (checked) {
+            mDateField.setEnabled(true);
+        } else {
+            mDateField.setEnabled(false);
+        }
+
+    }
+
 
     private void submitPost() {
         final String title = mTitleField.getText().toString();
@@ -115,6 +166,7 @@ public class NewPostActivity extends BaseActivity {
         final String language = spinner3.getSelectedItem().toString();
         final String price = mPriceField.getText().toString();
         final String date = mDateField.getText().toString();
+
 
         // Title is required
         if (TextUtils.isEmpty(title)) {
@@ -153,7 +205,8 @@ public class NewPostActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(userId, user.getUsername(), title, body, subject, language, "For " + school, price, date);
+                            writeNewPost(userId, user.getUsername(), title, body, subject, language,
+                                    "For " + school, price, date, isRequested);
                         }
 
                         // Finish this Activity, back to the stream
@@ -166,17 +219,17 @@ public class NewPostActivity extends BaseActivity {
                         Log.w(TAG, "getUser:onCancelled", databaseError.toException());
                     }
                 });
-
     }
 
 
-    private void writeNewPost(String userId, String username, String title, String body, String subject, String language, String school, String price, String date) {
+    private void writeNewPost(String userId, String username, String title, String body, String subject,
+                              String language, String school, String price, String date, boolean isReq) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
 
 
-        Post post = new Post(userId, username, title, body, subject, language, school, price, date);
+        Post post = new Post(userId, username, title, body, subject, language, school, price, date, isReq);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
