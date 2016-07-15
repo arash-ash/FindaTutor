@@ -105,7 +105,7 @@ public class RecentRequestedPostsFragment extends Fragment {
     public Query getQuery(DatabaseReference databaseReference){
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        return databaseReference.child("posts-requested")
+        return databaseReference.child("posts").orderByChild("isRequested").equalTo(true)
                 .limitToFirst(100);
     }
 

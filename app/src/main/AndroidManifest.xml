@@ -42,8 +42,7 @@
             android:name=".ChatActivity">
         </activity>
 
-        <activity
-            android:name=".MessagesActivity">
+        <activity android:name=".MessageListActivity">
         </activity>
 
 

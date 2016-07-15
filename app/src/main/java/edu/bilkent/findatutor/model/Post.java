@@ -3,6 +3,7 @@ package edu.bilkent.findatutor.model;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,8 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Post {
 
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
+    public boolean isRequested;
     public String uid;
     public String author;
     public String title;
@@ -18,11 +21,11 @@ public class Post {
     public String language;
     public String school;
     public String price;
-    public String date;
+    public String sessionDate;
     public int viewsCount = 0;
     public int sessionsCount = 0;
     public float rating;
-    private Date createdDate;
+    private String createdDate;
 
 
     public Post() {
@@ -39,7 +42,9 @@ public class Post {
         this.language = language;
         this.school = school;
         this.price = price;
-        this.date = date;
+        this.sessionDate = date;
+        createdDate = sDateFormat.format(new Date());
+        this.isRequested = false;
     }
 
 
@@ -55,7 +60,9 @@ public class Post {
         result.put("language", language);
         result.put("school", school);
         result.put("price", price);
-        result.put("date", date);
+        result.put("sessionDate", sessionDate);
+        result.put("createdDate", createdDate);
+        result.put("isRequested", isRequested);
 
         return result;
     }

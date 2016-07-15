@@ -175,19 +175,21 @@ public class NewPostActivity extends BaseActivity {
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
 
+
         Post post = new Post(userId, username, title, body, subject, language, school, price, date);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
 
 
+//        if (date.equals("")) {
+//            childUpdates.put("/posts/" + key, postValues);
+//        }
+//        else {
+//            childUpdates.put("/posts-requested/" + key, postValues);
+//        }
 
-        if (date.equals("")) {
-            childUpdates.put("/posts/" + key, postValues);
-        }
-        else {
-            childUpdates.put("/posts-requested/" + key, postValues);
-        }
+        childUpdates.put("/posts/" + key, postValues);
 
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 

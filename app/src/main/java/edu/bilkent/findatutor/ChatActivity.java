@@ -22,17 +22,25 @@ import java.util.Date;
 
 import edu.bilkent.findatutor.model.Message;
 
+import static edu.bilkent.findatutor.MessageSource.MessagesCallbacks;
+import static edu.bilkent.findatutor.MessageSource.MessagesListener;
+import static edu.bilkent.findatutor.MessageSource.addMessagesListener;
+import static edu.bilkent.findatutor.MessageSource.saveMessage;
+import static edu.bilkent.findatutor.MessageSource.stop;
+
 /**
  * Created by linus on 08.07.2016.
  */
 
 
 public class ChatActivity extends BaseActivity implements View.OnClickListener,
-        MessageSource.MessagesCallbacks{
+        MessagesCallbacks {
 
     public static final String USER_EXTRA = "USER";
     public static final String EXTRA_POST_KEY = "post_key";
     public static final String EXTRA_POST_TITLE = "post_title";
+    public static final String EXTRA_POST_USER = "extra_post_user";
+
 
     public static final String TAG = "ChatActivity";
 
@@ -42,7 +50,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
     private ListView mListView;
     private Date mLastMessageDate = new Date();
     private String uid;
-    private MessageSource.MessagesListener mListener;
+    private MessagesListener mListener;
     private String mPostKey;
     private String mPostTitle;
 
@@ -73,7 +81,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
 
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         mPostTitle = getIntent().getStringExtra(EXTRA_POST_TITLE);
-        uid = getUid();
+        uid = getIntent().getStringExtra(EXTRA_POST_USER);
 
 
         mListView = (ListView)findViewById(R.id.posts_list);
@@ -91,7 +99,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
         sendMessage.setOnClickListener(this);
 
 
-        mListener = MessageSource.addMessagesListener(uid, this, mPostKey);
+        mListener = addMessagesListener(uid, this, mPostKey);
 
     }
 
@@ -104,7 +112,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
         msg.setText(newMessage);
         msg.setSender(getEmail());
 
-        MessageSource.saveMessage(msg, uid, mPostKey, getEmail());
+        saveMessage(msg, uid, mPostKey, getEmail());
     }
 
     @Override
@@ -116,7 +124,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MessageSource.stop(mListener);
+        stop(mListener);
     }
 
 

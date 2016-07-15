@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import edu.bilkent.findatutor.ChatActivity;
-import edu.bilkent.findatutor.MessagesActivity;
+import edu.bilkent.findatutor.MessageListActivity;
 import edu.bilkent.findatutor.R;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.RequestedPostViewHolder;
@@ -70,8 +70,8 @@ public class MyPostsFragment extends Fragment {
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Launch PostDetailActivity
-                        Intent intent = new Intent(getActivity(), MessagesActivity.class);
+                        // Launch MessageListActivity
+                        Intent intent = new Intent(getActivity(), MessageListActivity.class);
                         intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
                         startActivity(intent);
                     }
@@ -107,7 +107,6 @@ public class MyPostsFragment extends Fragment {
 
     public Query getQuery(DatabaseReference databaseReference) {
         // All my posts
-        return databaseReference.child("user-posts")
-                .child(getUid());
+        return databaseReference.child("user-posts").child(getUid()).orderByChild("isRequested");
     }
 }

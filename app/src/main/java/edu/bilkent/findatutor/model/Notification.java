@@ -1,11 +1,13 @@
 package edu.bilkent.findatutor.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by arash on 7/13/16.
  */
 public class Notification {
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private String title;
     private String text;
     private String tag;

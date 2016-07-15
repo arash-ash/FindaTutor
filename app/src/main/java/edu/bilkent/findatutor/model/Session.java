@@ -1,5 +1,6 @@
 package edu.bilkent.findatutor.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -7,6 +8,7 @@ import java.util.Date;
  */
 public class Session {
 
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private User tutor;
     private User student;
     private Post post;

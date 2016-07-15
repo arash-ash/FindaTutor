@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import edu.bilkent.findatutor.ChatActivity;
@@ -29,6 +31,7 @@ public class RecentPostsFragment extends Fragment {
 
 
     private static final String TAG = "RecentPostsFragment";
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
 
     private DatabaseReference mDatabase;
 
@@ -76,14 +79,18 @@ public class RecentPostsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Chat chat = new Chat(model.title, getName());
+                        Chat chat = new Chat(model.title, getName(), getUid());
                         Map<String, Object> chatValues = chat.toMap();
-                        mDatabase.child("posts").child(postKey).child("chats").child(getUid()).setValue(chatValues);
+                        String date = sDateFormat.format(new Date());
+                        mDatabase.child("posts").child(postKey).child("users").child(getUid()).child("chatInfo").setValue(chatValues);
+                        mDatabase.child("users-posts-chatInfo").child(getUid()).child(postKey).child(model.uid).setValue(chatValues);
+                        mDatabase.child("users-posts-chatInfo").child(model.uid).child(postKey).child(getUid()).setValue(chatValues);
 
                         // Launch ChatActivity
                         Intent intent = new Intent(getActivity(), ChatActivity.class);
                         intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
                         intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.title);
+                        intent.putExtra(ChatActivity.EXTRA_POST_USER, getUid());
                         startActivity(intent);
                     }
                 });
@@ -140,8 +147,7 @@ public class RecentPostsFragment extends Fragment {
     public Query getQuery(DatabaseReference databaseReference) {
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        return databaseReference.child("posts")
+        return databaseReference.child("posts").orderByChild("isRequested").equalTo(false)
                 .limitToFirst(100);
-
     }
 }

@@ -45,7 +45,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
         priceView.setText(post.price);
         languageView.setText(post.language);
         schoolView.setText(post.school);
-        dateView.setText(post.date);
+        dateView.setText(post.sessionDate);
 
         //starView.setOnClickListener(starClickListener);
     }

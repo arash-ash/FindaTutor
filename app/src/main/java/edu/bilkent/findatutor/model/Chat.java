@@ -2,6 +2,7 @@ package edu.bilkent.findatutor.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,17 +12,22 @@ import java.util.Map;
  */
 public class Chat {
 
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private String title;
     private String sender;
-    private Date lastMessageDate;
     private Date createdDate;
+    private Date lastMessageDate;
+    private String senderUID;
+
 
     public Chat() {
     }
 
-    public Chat(String title, String sender) {
+    public Chat(String title, String sender, String senderUID) {
         this.title = title;
         this.sender = sender;
+        this.senderUID = senderUID;
+        this.createdDate = new Date();
     }
 
     @Exclude
@@ -29,6 +35,9 @@ public class Chat {
         HashMap<String, Object> result = new HashMap<>();
         result.put("title", title);
         result.put("sender", sender);
+        result.put("senderUID", senderUID);
+//        result.put("createdDate", sDateFormat.format(createdDate));
+//        result.put("lastMessageDate", sDateFormat.format(lastMessageDate));
 
         return result;
     }
@@ -57,7 +66,7 @@ public class Chat {
         this.lastMessageDate = lastMessageDate;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
+    public String getSenderUID() {
+        return senderUID;
     }
 }

@@ -3,6 +3,7 @@ package edu.bilkent.findatutor.model;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
 @IgnoreExtraProperties
 public class Review {
 
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private String author;
     private String text;
     private float rating;

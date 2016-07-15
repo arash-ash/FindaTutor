@@ -2,12 +2,14 @@ package edu.bilkent.findatutor.model;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 @IgnoreExtraProperties
 public class User {
 
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private String username;
     private String email;
     private String name;

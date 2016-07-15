@@ -31,7 +31,7 @@ public class MessageSource {
         HashMap<String, String> msg = new HashMap<>();
         msg.put(COLUMN_TEXT, message.getText());
         msg.put(COLUMN_SENDER, email);
-        mDatabase.child("posts").child(postKey).child(uid).child(key).setValue(msg);
+        mDatabase.child("posts").child(postKey).child("users").child(uid).child("messages").child(key).setValue(msg);
     }
 
     public static void saveRequestedMessage(Message message, String uid, String postKey, String email){
@@ -40,7 +40,7 @@ public class MessageSource {
         HashMap<String, String> msg = new HashMap<>();
         msg.put(COLUMN_TEXT, message.getText());
         msg.put(COLUMN_SENDER, email);
-        mDatabase.child("posts-requested").child(postKey).child(uid).child(key).setValue(msg);
+        mDatabase.child("posts-requested").child(postKey).child("users").child(uid).child("messages").child(key).setValue(msg);
 
     }
 
@@ -49,13 +49,13 @@ public class MessageSource {
 
     public static MessagesListener addMessagesListener(String uid, final MessagesCallbacks callbacks, String postKey){
         MessagesListener listener = new MessagesListener(callbacks);
-        mDatabase.child("posts").child(postKey).child(uid).addChildEventListener(listener);
+        mDatabase.child("posts").child(postKey).child("users").child(uid).child("messages").addChildEventListener(listener);
         return listener;
     }
 
     public static MessagesListener addRequestedMessagesListener(String uid, final MessagesCallbacks callbacks, String postKey){
         MessagesListener listener = new MessagesListener(callbacks);
-        mDatabase.child("posts-requested").child(postKey).child(uid).addChildEventListener(listener);
+        mDatabase.child("posts-requested").child(postKey).child("users").child(uid).child("messages").addChildEventListener(listener);
         return listener;
     }
 

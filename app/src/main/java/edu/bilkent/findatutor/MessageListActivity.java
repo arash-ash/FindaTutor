@@ -1,5 +1,6 @@
 package edu.bilkent.findatutor;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,9 +21,9 @@ import edu.bilkent.findatutor.viewholders.MessageViewHolder;
 /**
  * Created by linus on 08.07.2016.
  */
-public class MessagesActivity extends BaseActivity {
+public class MessageListActivity extends BaseActivity {
 
-    private static final String TAG = "MessagesActivity";
+    private static final String TAG = "MessageListActivity";
     private String mPostKey;
 
     private DatabaseReference mDatabase;
@@ -31,7 +32,8 @@ public class MessagesActivity extends BaseActivity {
     private RecyclerView mRecycler;
     private LinearLayoutManager mManager;
 
-    public MessagesActivity() {}
+    public MessageListActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +85,11 @@ public class MessagesActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         // Launch ChatActivity
-//                        Intent intent = new Intent(this, ChatActivity.class);
-//                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
-//                        intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.title);
-//                        startActivity(intent);
+                        Intent intent = new Intent(MessageListActivity.this, ChatActivity.class);
+                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, mPostKey);
+                        intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.getTitle());
+                        intent.putExtra(ChatActivity.EXTRA_POST_USER, model.getSenderUID());
+                        startActivity(intent);
                     }
                 });
 
@@ -107,7 +110,7 @@ public class MessagesActivity extends BaseActivity {
     public Query getQuery(DatabaseReference databaseReference) {
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        return databaseReference.child("posts").child(mPostKey).child("chats")
+        return databaseReference.child("users-posts-chatInfo").child(getUid()).child(mPostKey)
                 .limitToFirst(100);
 
     }
