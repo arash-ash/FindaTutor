@@ -1,9 +1,16 @@
 package edu.bilkent.findatutor;
 
 import android.annotation.TargetApi;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -119,6 +126,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
     public void onMessageAdded(Message message) {
         mMessages.add(message);
         mAdapter.notifyDataSetChanged();
+        //sendNotification(message.getSender() + " said: " + message.getText());
     }
 
     @Override
@@ -127,6 +135,26 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
         stop(mListener);
     }
 
+    private void sendNotification(String messageBody) {
+        Intent intent = new Intent(this, NotificationListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.findatutor_icon)
+                .setContentTitle("Notification")
+                .setContentText(messageBody)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
 
     private class MessagesAdapter extends ArrayAdapter<Message> {
         MessagesAdapter(ArrayList<Message> messages){

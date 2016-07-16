@@ -121,8 +121,8 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         // Write new user
         writeNewUser(user.getUid(), username, user.getEmail());
 
-        // Go to AdsActivity
-        startActivity(new Intent(SignInActivity.this, AdsActivity.class));
+        // Go to PostListMainActivity
+        startActivity(new Intent(SignInActivity.this, PostListMainActivity.class));
         finish();
     }
 

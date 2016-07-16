@@ -1,5 +1,6 @@
 package edu.bilkent.findatutor.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,13 +15,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+import edu.bilkent.findatutor.ChatActivity;
 import edu.bilkent.findatutor.R;
+import edu.bilkent.findatutor.model.Chat;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.RequestedPostViewHolder;
+
+import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
 public class RecentRequestedPostsFragment extends Fragment {
 
     private static final String TAG = "PostListFragment";
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
 
     private DatabaseReference mDatabase;
 
@@ -67,10 +77,19 @@ public class RecentRequestedPostsFragment extends Fragment {
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        // Launch PostDetailActivity
-//                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
-//                        intent.putExtra(PostDetailActivity.EXTRA_POST_KEY, postKey);
-//                        startActivity(intent);
+                        Chat chat = new Chat(model.title, getName(), getUid());
+                        Map<String, Object> chatValues = chat.toMap();
+                        String date = sDateFormat.format(new Date());
+                        mDatabase.child("posts").child(postKey).child("users").child(getUid()).child("chatInfo").setValue(chatValues);
+                        mDatabase.child("users-posts-chatInfo").child(getUid()).child(postKey).child(model.uid).setValue(chatValues);
+                        mDatabase.child("users-posts-chatInfo").child(model.uid).child(postKey).child(getUid()).setValue(chatValues);
+
+                        // Launch ChatActivity
+                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
+                        intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.title);
+                        intent.putExtra(ChatActivity.EXTRA_POST_USER, getUid());
+                        startActivity(intent);
                     }
                 });
 
@@ -100,6 +119,19 @@ public class RecentRequestedPostsFragment extends Fragment {
 
     public String getUid() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    public String getName() {
+        String email = getInstance().getCurrentUser().getEmail();
+        return usernameFromEmail(email);
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
     }
 
     public Query getQuery(DatabaseReference databaseReference){

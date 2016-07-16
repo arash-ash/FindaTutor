@@ -26,6 +26,7 @@ import edu.bilkent.findatutor.viewholders.PostViewHolder;
 
 import static com.google.firebase.auth.FirebaseAuth.getInstance;
 
+
 public class RecentPostsFragment extends Fragment {
 
 

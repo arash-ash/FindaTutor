@@ -40,8 +40,8 @@
     <string name="course_title_hint">Course Title</string>
     <string name="description_hint">Description</string>
     <string name="tl_hour_rate">TL/hour</string>
-    <string name="price_label">Price:</string>
-    <string name="request_date_hint">Request Date:</string>
+    <string name="price_label">Price</string>
+    <string name="request_date_hint">Request Date</string>
     <string name="send_button">Send</string>
 
     <string-array name="languages_array">
@@ -52,7 +52,7 @@
     </string-array>
 
     <string-array name="subjects_array">
-        <item>Subject</item>
+        <item>Category</item>
         <item>Math</item>
         <item>Physics</item>
         <item>Chemistry</item>
@@ -69,7 +69,7 @@
 
 
     <string-array name="schools_array">
-            <item>School</item>
+        <item>Instituition</item>
             <item>Any School</item>
             <item>Ankara Univ</item>
             <item>Bilkent</item>

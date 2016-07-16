@@ -34,28 +34,11 @@ public class MessageSource {
         mDatabase.child("posts").child(postKey).child("users").child(uid).child("messages").child(key).setValue(msg);
     }
 
-    public static void saveRequestedMessage(Message message, String uid, String postKey, String email){
-        Date date = message.getDate();
-        String key = sDateFormat.format(date);
-        HashMap<String, String> msg = new HashMap<>();
-        msg.put(COLUMN_TEXT, message.getText());
-        msg.put(COLUMN_SENDER, email);
-        mDatabase.child("posts-requested").child(postKey).child("users").child(uid).child("messages").child(key).setValue(msg);
-
-    }
-
-
 
 
     public static MessagesListener addMessagesListener(String uid, final MessagesCallbacks callbacks, String postKey){
         MessagesListener listener = new MessagesListener(callbacks);
         mDatabase.child("posts").child(postKey).child("users").child(uid).child("messages").addChildEventListener(listener);
-        return listener;
-    }
-
-    public static MessagesListener addRequestedMessagesListener(String uid, final MessagesCallbacks callbacks, String postKey){
-        MessagesListener listener = new MessagesListener(callbacks);
-        mDatabase.child("posts-requested").child(postKey).child("users").child(uid).child("messages").addChildEventListener(listener);
         return listener;
     }
 
@@ -73,18 +56,19 @@ public class MessageSource {
         MessagesListener(MessagesCallbacks callbacks){
             this.callbacks = callbacks;
         }
+
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-            HashMap<String,String> msg = (HashMap)dataSnapshot.getValue();
+            HashMap<String, String> msg = (HashMap) dataSnapshot.getValue();
             Message message = new Message();
             message.setSender(msg.get(COLUMN_SENDER));
             message.setText(msg.get(COLUMN_TEXT));
             try {
                 message.setDate(sDateFormat.parse(dataSnapshot.getKey()));
-            }catch (Exception e){
+            } catch (Exception e) {
                 Log.d(TAG, "Couldn't parse date" + e);
             }
-            if(callbacks != null){
+            if (callbacks != null) {
                 callbacks.onMessageAdded(message);
             }
         }
@@ -100,4 +84,6 @@ public class MessageSource {
         @Override
         public void onCancelled(DatabaseError databaseError) {}
     }
+
+
 }

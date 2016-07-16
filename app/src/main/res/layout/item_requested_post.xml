@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp">
@@ -29,58 +28,60 @@
         </LinearLayout>
 
 
-        <include layout="@layout/include_post_text"
+        <include
+            android:id="@+id/include"
+            layout="@layout/include_post_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/include"
             android:layout_below="@+id/post_author_layout"
-            android:layout_toStartOf="@+id/course_title"
-            android:layout_marginRight="5dp" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/course_title"
+            android:layout_toStartOf="@+id/course_title" />
 
         <TextView
             android:id="@+id/course_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Bilkent University"
-            android:gravity="right"
-            android:layout_alignTop="@+id/include"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="23dp" />
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/include"
+            android:layout_marginTop="23dp"
+            android:gravity="right"
+            android:text="Bilkent University"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/post_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="30 TL/hour"
-            android:layout_below="@+id/course_title"
+            android:layout_alignEnd="@+id/post_language"
             android:layout_alignRight="@+id/post_language"
-            android:layout_alignEnd="@+id/post_language" />
+            android:layout_below="@+id/course_title"
+            android:text="30 TL/hour"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/post_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="English"
-            android:gravity="right"
-            android:layout_below="@+id/post_price"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@+id/post_price"
+            android:gravity="right"
+            android:text="English"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
             android:id="@+id/post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="29 June"
             android:layout_alignBottom="@+id/post_author_layout"
+            android:layout_alignEnd="@+id/star_layout"
             android:layout_alignRight="@+id/star_layout"
-            android:layout_alignEnd="@+id/star_layout" />
+            android:text="29 June"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </RelativeLayout>
 

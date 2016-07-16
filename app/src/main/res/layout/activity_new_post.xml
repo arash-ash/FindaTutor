@@ -42,10 +42,15 @@
                 android:id="@+id/spinner_subject"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/field_price"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="60dp" />
+                android:layout_alignRight="@+id/field_price"
+                android:layout_marginTop="60dp"
+                android:layout_toStartOf="@+id/fab_submit_post"
+                android:longClickable="true"
+                android:minHeight="70dp" />
 
             <EditText
                 android:id="@+id/field_title"
@@ -55,7 +60,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/spinner_subject"
                 android:hint="@string/course_title_hint"
-                android:maxLines="1" />
+                android:maxLines="2"
+                android:minLines="1" />
 
             <EditText
                 android:id="@+id/field_body"
@@ -67,6 +73,7 @@
                 android:hint="@string/description_hint"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
+                android:minLines="2"
                 android:scrollHorizontally="false" />
 
 
@@ -83,53 +90,46 @@
                 android:id="@+id/spinner_school"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/checkBox"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/spinner_language" />
+                android:layout_alignRight="@+id/checkBox"
+                android:layout_below="@+id/spinner_language"
+                android:minHeight="70dp" />
 
             <Spinner
                 android:id="@+id/spinner_language"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/spinner_school"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
+                android:layout_alignRight="@+id/spinner_school"
+                android:layout_below="@+id/field_price"
+                android:minHeight="70dp" />
 
             <EditText
                 android:id="@+id/field_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textView3"
-                android:layout_alignBottom="@+id/textView3"
-                android:layout_alignEnd="@+id/fab_submit_post"
-                android:layout_alignRight="@+id/fab_submit_post"
-                android:layout_toEndOf="@+id/textView3"
-                android:layout_toRightOf="@+id/textView3"
-                android:gravity="right"
-                android:inputType="textMultiLine"
-                android:maxLines="10"
-                android:scrollHorizontally="false"
-                android:text="@string/tl_hour_rate" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/checkBox"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/checkBox"
                 android:layout_below="@+id/field_body"
-                android:layout_marginLeft="29dp"
-                android:layout_marginStart="29dp"
-                android:text="@string/price_label"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:gravity="left|right"
+                android:hint="@string/price_label"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollHorizontally="false" />
 
             <EditText
                 android:id="@+id/field_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/fab_submit_post"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/checkBox"
                 android:hint="@string/request_date_hint"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
@@ -139,12 +139,13 @@
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/field_date"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinner_school"
+                android:layout_marginTop="40dp"
                 android:checked="false"
                 android:onClick="onCheckboxClicked"
-                android:text="is this a requested ad?" />
+                android:text="are you requesting for a session?" />
 
         </RelativeLayout>
 
