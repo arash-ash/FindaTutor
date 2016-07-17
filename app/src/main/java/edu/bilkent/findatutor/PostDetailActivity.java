@@ -47,6 +47,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

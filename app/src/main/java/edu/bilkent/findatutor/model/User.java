@@ -1,5 +1,7 @@
 package edu.bilkent.findatutor.model;
 
+import android.graphics.drawable.Drawable;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.text.SimpleDateFormat;
@@ -26,6 +28,7 @@ public class User {
     private float rating;
     private boolean online;
     private Date createdDate;
+    private Drawable photo;
 
 
     public User() {
@@ -35,7 +38,9 @@ public class User {
     public User(String username, String email) {
         this.username = username;
         this.email = email;
+        this.photoURL = "https://lh3.googleusercontent.com/-EF9BoynKc9w/AAAAAAAAAAI/AAAAAAAAAAA/1au5roMkCC4/photo.jpg";
     }
+
 
     public Date getCreatedDate() {
         return createdDate;
@@ -123,6 +128,10 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Drawable getPhoto() {
+        return photo;
     }
 }
 

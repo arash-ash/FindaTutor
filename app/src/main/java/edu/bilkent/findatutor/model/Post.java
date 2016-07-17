@@ -22,6 +22,7 @@ public class Post {
     public String school;
     public String price;
     public String sessionDate;
+    public String authorPhotoUrl;
     public int viewsCount = 0;
     public int sessionsCount = 0;
     public float rating;
@@ -45,6 +46,7 @@ public class Post {
         this.sessionDate = date;
         createdDate = sDateFormat.format(new Date());
         this.isRequested = isRequested;
+        this.authorPhotoUrl = "https://lh3.googleusercontent.com/-EF9BoynKc9w/AAAAAAAAAAI/AAAAAAAAAAA/1au5roMkCC4/photo.jpg";
     }
 
 
@@ -63,7 +65,7 @@ public class Post {
         result.put("sessionDate", sessionDate);
         result.put("createdDate", createdDate);
         result.put("isRequested", isRequested);
-
+        result.put("authorPhotoUrl", authorPhotoUrl);
         return result;
     }
 

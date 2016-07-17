@@ -35,6 +35,8 @@ public class PostListMainActivity extends BaseActivity {
     private FragmentPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
     private DatabaseReference mDatabase;
+    private String username;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +59,13 @@ public class PostListMainActivity extends BaseActivity {
             navigationView.setNavigationItemSelectedListener(this);
 
 
+        username = getIntent().getStringExtra("username");
+        email = getIntent().getStringExtra("email");
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("users-posts-chatInfo").child(getUid()).addChildEventListener(new MyChildEventListener());
+
 
 
         // Create the adapter that will return a fragment for each section
@@ -99,7 +106,10 @@ public class PostListMainActivity extends BaseActivity {
         findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PostListMainActivity.this, NewPostActivity.class));
+                Intent intent = new Intent(PostListMainActivity.this, NewPostActivity.class);
+                intent.putExtra("username", username);
+                intent.putExtra("email", email);
+                startActivity(intent);
             }
         });
 

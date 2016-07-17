@@ -23,10 +23,9 @@ import edu.bilkent.findatutor.model.User;
 public class SignInActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "SignInActivity";
-
+    public User user;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-
     private EditText mEmailField;
     private EditText mPasswordField;
     private Button mSignInButton;
@@ -117,12 +116,15 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
 
     private void onAuthSuccess(FirebaseUser user) {
         String username = usernameFromEmail(user.getEmail());
-
+        String email = user.getEmail();
         // Write new user
-        writeNewUser(user.getUid(), username, user.getEmail());
+        writeNewUser(user.getUid(), username, email);
 
         // Go to PostListMainActivity
-        startActivity(new Intent(SignInActivity.this, PostListMainActivity.class));
+        Intent intent = new Intent(SignInActivity.this, PostListMainActivity.class);
+        intent.putExtra("username", username);
+        intent.putExtra("email", email);
+        startActivity(intent);
         finish();
     }
 

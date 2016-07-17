@@ -15,6 +15,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     private ProgressDialog mProgressDialog;
 
+
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
