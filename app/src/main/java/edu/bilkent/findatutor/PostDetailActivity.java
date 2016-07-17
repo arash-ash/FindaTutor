@@ -163,7 +163,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user information
+                        // Get modelUser information
                         User user = dataSnapshot.getValue(User.class);
                         String authorName = user.getUsername();
 

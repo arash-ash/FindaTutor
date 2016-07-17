@@ -193,7 +193,7 @@ public class NewPostActivity extends BaseActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Get user value
+                        // Get modelUser value
                         User user = dataSnapshot.getValue(User.class);
 
 
@@ -201,7 +201,7 @@ public class NewPostActivity extends BaseActivity {
                             // User is null, error out
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewPostActivity.this,
-                                    "Error: could not fetch user.",
+                                    "Error: could not fetch modelUser.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
@@ -224,7 +224,7 @@ public class NewPostActivity extends BaseActivity {
 
     private void writeNewPost(String userId, String username, String title, String body, String subject,
                               String language, String school, String price, String date, boolean isReq) {
-        // Create new post at /user-posts/$userid/$postid and at
+        // Create new post at /modelUser-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
 
@@ -244,7 +244,7 @@ public class NewPostActivity extends BaseActivity {
 
         childUpdates.put("/posts/" + key, postValues);
 
-        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
+        childUpdates.put("/modelUser-posts/" + userId + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }

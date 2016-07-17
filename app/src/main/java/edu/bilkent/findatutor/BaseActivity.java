@@ -15,12 +15,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     private ProgressDialog mProgressDialog;
 
-
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setCancelable(false);
-            mProgressDialog.setMessage("Loading...");
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
         }
 
         mProgressDialog.show();
@@ -30,6 +29,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        hideProgressDialog();
     }
 
     public String getUid() {

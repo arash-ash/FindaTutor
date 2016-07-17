@@ -43,6 +43,10 @@
     <string name="price_label">Price</string>
     <string name="request_date_hint">Request Date</string>
     <string name="send_button">Send</string>
+    <string name="signed_out">signed out</string>
+    <string name="signed_in_fmt">Auth Code: %s</string>
+    <string name="google_status_fmt">Google User: %s</string>
+    <string name="loading">Loading…</string>
 
     <string-array name="languages_array">
         <item>Language</item>
