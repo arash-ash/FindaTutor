@@ -294,8 +294,9 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
 
         String username = usernameFromEmail(user.getEmail());
         String email = user.getEmail();
+        String photoUrl = user.getPhotoUrl().toString();
         // Write new modelUser
-        writeNewUser(user.getUid(), username, email);
+        writeNewUser(user.getUid(), username, email, photoUrl);
 
         // Go to PostListMainActivity
         Intent intent = new Intent(SignInActivity.this, PostListMainActivity.class);
@@ -412,6 +413,12 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
 
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email);
+
+        mDatabase.child("users").child(userId).setValue(user);
+    }
+
+    private void writeNewUser(String userId, String name, String email, String photoURL) {
+        User user = new User(name, email, photoURL);
 
         mDatabase.child("users").child(userId).setValue(user);
     }

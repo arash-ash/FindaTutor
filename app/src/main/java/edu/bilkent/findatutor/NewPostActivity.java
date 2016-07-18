@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +48,7 @@ public class NewPostActivity extends BaseActivity {
     private EditText mPriceField;
     private EditText mDateField;
     private boolean isRequested;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,7 @@ public class NewPostActivity extends BaseActivity {
         spinner3.setAdapter(adapter3);
 
 
-
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mTitleField = (EditText) findViewById(R.id.field_title);
@@ -201,12 +204,12 @@ public class NewPostActivity extends BaseActivity {
                             // User is null, error out
                             Log.e(TAG, "User " + userId + " is unexpectedly null");
                             Toast.makeText(NewPostActivity.this,
-                                    "Error: could not fetch modelUser.",
+                                    "Error: could not fetch user.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
                             writeNewPost(userId, user.getUsername(), title, body, subject, language,
-                                    "For " + school, price, date, isRequested);
+                                    "For " + school, price, date, isRequested, firebaseUser.getPhotoUrl().toString());
                         }
 
                         // Finish this Activity, back to the stream
@@ -223,28 +226,21 @@ public class NewPostActivity extends BaseActivity {
 
 
     private void writeNewPost(String userId, String username, String title, String body, String subject,
-                              String language, String school, String price, String date, boolean isReq) {
+                              String language, String school, String price, String date, boolean isReq, String photoURL) {
         // Create new post at /modelUser-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
 
 
-        Post post = new Post(userId, username, title, body, subject, language, school, price, date, isReq);
+        Post post = new Post(userId, username, title, body, subject, language, school, price, date, isReq, photoURL);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
 
 
-//        if (date.equals("")) {
-//            childUpdates.put("/posts/" + key, postValues);
-//        }
-//        else {
-//            childUpdates.put("/posts-requested/" + key, postValues);
-//        }
-
         childUpdates.put("/posts/" + key, postValues);
 
-        childUpdates.put("/modelUser-posts/" + userId + "/" + key, postValues);
+        childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }

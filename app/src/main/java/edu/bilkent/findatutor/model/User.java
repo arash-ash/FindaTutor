@@ -41,6 +41,12 @@ public class User {
         this.photoURL = "https://lh3.googleusercontent.com/-EF9BoynKc9w/AAAAAAAAAAI/AAAAAAAAAAA/1au5roMkCC4/photo.jpg";
     }
 
+    public User(String username, String email, String photoURL) {
+        this.username = username;
+        this.email = email;
+        this.photoURL = photoURL;
+    }
+
 
     public Date getCreatedDate() {
         return createdDate;

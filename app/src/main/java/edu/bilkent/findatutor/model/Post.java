@@ -34,7 +34,7 @@ public class Post {
     }
 
     public Post(String uid, String author, String title, String body, String subject,
-                String language, String school, String price, String date, boolean isRequested) {
+                String language, String school, String price, String date, boolean isRequested, String photoURL) {
         this.uid = uid;
         this.author = author;
         this.title = title;
@@ -46,7 +46,7 @@ public class Post {
         this.sessionDate = date;
         createdDate = sDateFormat.format(new Date());
         this.isRequested = isRequested;
-        this.authorPhotoUrl = "https://lh3.googleusercontent.com/-EF9BoynKc9w/AAAAAAAAAAI/AAAAAAAAAAA/1au5roMkCC4/photo.jpg";
+        this.authorPhotoUrl = photoURL;
     }
 
 

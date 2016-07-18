@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -20,6 +21,7 @@ import java.util.Map;
 
 import edu.bilkent.findatutor.ChatActivity;
 import edu.bilkent.findatutor.R;
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Chat;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.PostViewHolder;
@@ -76,6 +78,8 @@ public class RecentPostsFragment extends Fragment {
 
                 // Set click listener for the whole post view
                 final String postKey = postRef.getKey();
+
+
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -101,12 +105,20 @@ public class RecentPostsFragment extends Fragment {
                 // Bind Post to ViewHolder,
                 viewHolder.bindToPost(model, new View.OnClickListener() {
                     @Override
-                    public void onClick(View starView) {
+                    public void onClick(View view) {
                         // Neeed to write to both places the post is stored
 //                        DatabaseReference globalPostRef = mDatabase.child("posts").child(postRef.getKey());
 //                        DatabaseReference userPostRef = mDatabase.child("modelUser-posts").child(model.uid).child(postRef.getKey());
                     }
                 });
+
+
+                String url = model.authorPhotoUrl;
+                Glide
+                        .with(RecentPostsFragment.this)
+                        .load(url)
+                        .transform(new CircleTransform(getContext()))
+                        .into(viewHolder.imageView);
             }
         };
         mRecycler.setAdapter(mAdapter);

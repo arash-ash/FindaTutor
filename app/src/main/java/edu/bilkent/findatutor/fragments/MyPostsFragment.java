@@ -107,6 +107,6 @@ public class MyPostsFragment extends Fragment {
 
     public Query getQuery(DatabaseReference databaseReference) {
         // All my posts
-        return databaseReference.child("modelUser-posts").child(getUid()).orderByChild("isRequested");
+        return databaseReference.child("user-posts").child(getUid()).orderByChild("isRequested");
     }
 }
