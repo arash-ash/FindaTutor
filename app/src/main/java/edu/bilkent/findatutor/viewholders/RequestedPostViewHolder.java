@@ -2,6 +2,7 @@ package edu.bilkent.findatutor.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.bilkent.findatutor.R;
@@ -19,6 +20,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
     public TextView languageView;
     public TextView schoolView;
     public TextView dateView;
+    public ImageView imageView;
 
     public RequestedPostViewHolder(View itemView) {
         super(itemView);
@@ -33,6 +35,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
         languageView = (TextView) itemView.findViewById(R.id.post_language);
         schoolView = (TextView) itemView.findViewById(R.id.course_title);
         dateView = (TextView) itemView.findViewById(R.id.post_date);
+        imageView = (ImageView) itemView.findViewById(R.id.post_author_photo);
     }
 
     public void bindToPost(Post post, View.OnClickListener starClickListener) {
@@ -46,6 +49,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
         languageView.setText(post.language);
         schoolView.setText(post.school);
         dateView.setText(post.sessionDate);
+
 
         //starView.setOnClickListener(starClickListener);
     }

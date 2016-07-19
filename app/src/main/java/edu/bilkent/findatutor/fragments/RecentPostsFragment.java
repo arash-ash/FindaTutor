@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 import edu.bilkent.findatutor.ChatActivity;
+import edu.bilkent.findatutor.PostDetailActivity;
 import edu.bilkent.findatutor.R;
 import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Chat;
@@ -84,15 +85,16 @@ public class RecentPostsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
 
-                        Chat chat = new Chat(model.title, getName(), getUid());
+                        Chat chat = new Chat(model.title, getName(), getUid(), postKey);
                         Map<String, Object> chatValues = chat.toMap();
                         String date = sDateFormat.format(new Date());
                         mDatabase.child("posts").child(postKey).child("users").child(getUid()).child("chatInfo").setValue(chatValues);
-                        mDatabase.child("users-posts-chatInfo").child(getUid()).child(postKey).child(model.uid).setValue(chatValues);
-                        mDatabase.child("users-posts-chatInfo").child(model.uid).child(postKey).child(getUid()).setValue(chatValues);
+                        mDatabase.child("user-messages").child(getUid()).child(date).setValue(chatValues);
+                        mDatabase.child("user-messages").child(model.uid).child(date).setValue(chatValues);
 
                         // Launch ChatActivity
-                        Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        // Intent intent = new Intent(getActivity(), ChatActivity.class);
+                        Intent intent = new Intent(getActivity(), PostDetailActivity.class);
                         intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
                         intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.title);
                         intent.putExtra(ChatActivity.EXTRA_POST_USER, getUid());

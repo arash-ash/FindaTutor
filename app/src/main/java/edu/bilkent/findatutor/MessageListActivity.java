@@ -58,8 +58,6 @@ public class MessageListActivity extends BaseActivity {
 
 
 
-        mPostKey = getIntent().getStringExtra(ChatActivity.EXTRA_POST_KEY);
-
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mRecycler = (RecyclerView) findViewById(R.id.messages_list);
@@ -86,7 +84,7 @@ public class MessageListActivity extends BaseActivity {
                     public void onClick(View v) {
                         // Launch ChatActivity
                         Intent intent = new Intent(MessageListActivity.this, ChatActivity.class);
-                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, mPostKey);
+                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, model.getPostUID());
                         intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.getTitle());
                         intent.putExtra(ChatActivity.EXTRA_POST_USER, model.getSenderUID());
                         startActivity(intent);
@@ -110,7 +108,7 @@ public class MessageListActivity extends BaseActivity {
     public Query getQuery(DatabaseReference databaseReference) {
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        return databaseReference.child("users-posts-chatInfo").child(getUid()).child(mPostKey)
+        return databaseReference.child("user-messages").child(getUid())
                 .limitToFirst(100);
 
     }

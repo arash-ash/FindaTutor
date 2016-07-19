@@ -13,6 +13,7 @@ public class Review {
 
     private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     private String author;
+    private String authorPhotoURL;
     private String text;
     private float rating;
     private Date createdDate;
@@ -21,9 +22,10 @@ public class Review {
         // Default constructor required for calls to DataSnapshot.getValue(Review.class)
     }
 
-    public Review(String uid, String author, String text) {
+    public Review(String uid, String author, String text, String url) {
         this.author = author;
         this.text = text;
+        this.authorPhotoURL = url;
     }
 
     @Exclude
@@ -31,6 +33,7 @@ public class Review {
         HashMap<String, Object> result = new HashMap<>();
         result.put("author", author);
         result.put("text", text);
+        result.put("authorPhotoURL", authorPhotoURL);
 
         return result;
     }
@@ -54,6 +57,10 @@ public class Review {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public String getAuthorPhotoURL() {
+        return authorPhotoURL;
     }
 }
 

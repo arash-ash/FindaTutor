@@ -1,6 +1,5 @@
 package edu.bilkent.findatutor.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,15 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import edu.bilkent.findatutor.ChatActivity;
-import edu.bilkent.findatutor.MessageListActivity;
 import edu.bilkent.findatutor.R;
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.viewholders.RequestedPostViewHolder;
 
@@ -70,10 +69,10 @@ public class MyPostsFragment extends Fragment {
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // Launch MessageListActivity
-                        Intent intent = new Intent(getActivity(), MessageListActivity.class);
-                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
-                        startActivity(intent);
+//                        // Launch MessageListActivity
+//                        Intent intent = new Intent(getActivity(), MessageListActivity.class);
+//                        intent.putExtra(ChatActivity.EXTRA_POST_KEY, postKey);
+//                        startActivity(intent);
                     }
                 });
 
@@ -87,6 +86,13 @@ public class MyPostsFragment extends Fragment {
 //                        DatabaseReference userPostRef = mDatabase.child("modelUser-posts").child(model.uid).child(postRef.getKey());
                     }
                 });
+
+                String url = model.authorPhotoUrl;
+                Glide
+                        .with(MyPostsFragment.this)
+                        .load(url)
+                        .transform(new CircleTransform(getContext()))
+                        .into(viewHolder.imageView);
             }
         };
         mRecycler.setAdapter(mAdapter);

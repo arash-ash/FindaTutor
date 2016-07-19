@@ -18,16 +18,18 @@ public class Chat {
     private Date createdDate;
     private Date lastMessageDate;
     private String senderUID;
+    private String postUID;
 
 
     public Chat() {
     }
 
-    public Chat(String title, String sender, String senderUID) {
+    public Chat(String title, String sender, String senderUID, String postUID) {
         this.title = title;
         this.sender = sender;
         this.senderUID = senderUID;
         this.createdDate = new Date();
+        this.postUID = postUID;
     }
 
     @Exclude
@@ -36,6 +38,7 @@ public class Chat {
         result.put("title", title);
         result.put("sender", sender);
         result.put("senderUID", senderUID);
+        result.put("postUID", postUID);
 //        result.put("createdDate", sDateFormat.format(createdDate));
 //        result.put("lastMessageDate", sDateFormat.format(lastMessageDate));
 
@@ -68,5 +71,9 @@ public class Chat {
 
     public String getSenderUID() {
         return senderUID;
+    }
+
+    public String getPostUID() {
+        return postUID;
     }
 }

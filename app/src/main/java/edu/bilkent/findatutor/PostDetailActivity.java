@@ -1,6 +1,7 @@
 package edu.bilkent.findatutor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,27 +29,29 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.model.Review;
 import edu.bilkent.findatutor.model.User;
+import edu.bilkent.findatutor.viewholders.CommentViewHolder;
 
 public class PostDetailActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String EXTRA_POST_KEY = "post_key";
     private static final String TAG = "PostDetailActivity";
+    public Button messageButton;
     private DatabaseReference mPostReference;
     private DatabaseReference mCommentsReference;
     private ValueEventListener mPostListener;
     private String mPostKey;
+    private String mPostTitle;
     private CommentAdapter mAdapter;
-
     private TextView mAuthorView;
     private TextView mTitleView;
     private TextView mBodyView;
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
-    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +77,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
+        mPostTitle = getIntent().getStringExtra(ChatActivity.EXTRA_POST_TITLE);
         if (mPostKey == null) {
             throw new IllegalArgumentException("Must pass EXTRA_POST_KEY");
         }
@@ -81,7 +86,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mPostReference = FirebaseDatabase.getInstance().getReference()
                 .child("posts").child(mPostKey);
         mCommentsReference = FirebaseDatabase.getInstance().getReference()
-                .child("post-comments").child(mPostKey);
+                .child("post-reviews").child(mPostKey);
 
         // Initialize Views
         mAuthorView = (TextView) findViewById(R.id.post_author);
@@ -90,7 +95,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mCommentField = (EditText) findViewById(R.id.field_comment_text);
         mCommentButton = (Button) findViewById(R.id.button_post_comment);
         mCommentsRecycler = (RecyclerView) findViewById(R.id.recycler_comments);
+        messageButton = (Button) findViewById(R.id.message_button);
 
+
+        messageButton.setOnClickListener(this);
         mCommentButton.setOnClickListener(this);
         mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -154,7 +162,18 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             case R.id.button_post_comment:
                 postComment();
                 break;
+            case R.id.message_button:
+                chat();
+                break;
         }
+    }
+
+    private void chat() {
+        Intent intent = new Intent(PostDetailActivity.this, ChatActivity.class);
+        intent.putExtra(ChatActivity.EXTRA_POST_KEY, mPostKey);
+        intent.putExtra(ChatActivity.EXTRA_POST_TITLE, mPostTitle);
+        intent.putExtra(ChatActivity.EXTRA_POST_USER, getUid());
+        startActivity(intent);
     }
 
     private void postComment() {
@@ -169,7 +188,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
                         // Create new review object
                         String commentText = mCommentField.getText().toString();
-                        Review review = new Review(uid, authorName, commentText);
+                        Review review = new Review(uid, authorName, commentText, user.getPhotoURL());
 
                         // Push the review, it will appear in the list
                         mCommentsReference.push().setValue(review);
@@ -185,20 +204,8 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 });
     }
 
-    private static class CommentViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView authorView;
-        public TextView bodyView;
-
-        public CommentViewHolder(View itemView) {
-            super(itemView);
-
-            authorView = (TextView) itemView.findViewById(R.id.comment_author);
-            bodyView = (TextView) itemView.findViewById(R.id.comment_body);
-        }
-    }
-
-    private static class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
+    private class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
         private Context mContext;
         private DatabaseReference mDatabaseReference;
@@ -313,6 +320,13 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             Review review = mReviews.get(position);
             holder.authorView.setText(review.getAuthor());
             holder.bodyView.setText(review.getText());
+
+            String url = review.getAuthorPhotoURL();
+            Glide
+                    .with(PostDetailActivity.this)
+                    .load(url)
+                    .transform(new CircleTransform(getBaseContext()))
+                    .into(holder.authorPhoto);
         }
 
         @Override

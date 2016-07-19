@@ -61,6 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             startActivity(new Intent(this, NotificationListActivity.class));
 
         } else if (id == R.id.nav_messages) {
+            startActivity(new Intent(this, MessageListActivity.class));
 
         } else if (id == R.id.nav_sessions) {
 

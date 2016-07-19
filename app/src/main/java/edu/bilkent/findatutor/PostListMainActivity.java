@@ -64,7 +64,7 @@ public class PostListMainActivity extends BaseActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users-posts-chatInfo").child(getUid()).addChildEventListener(new MyChildEventListener());
+        mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MyChildEventListener());
 
 
 
