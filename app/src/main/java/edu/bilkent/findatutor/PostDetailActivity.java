@@ -26,20 +26,28 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import edu.bilkent.findatutor.misc.CircleTransform;
+import edu.bilkent.findatutor.model.Chat;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.model.Review;
 import edu.bilkent.findatutor.model.User;
 import edu.bilkent.findatutor.viewholders.CommentViewHolder;
 
+import static com.google.firebase.auth.FirebaseAuth.getInstance;
+
 public class PostDetailActivity extends BaseActivity implements View.OnClickListener {
 
     public static final String EXTRA_POST_KEY = "post_key";
     private static final String TAG = "PostDetailActivity";
+    private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     public Button messageButton;
+    String mPostAuthorUID;
     private DatabaseReference mPostReference;
     private DatabaseReference mCommentsReference;
     private ValueEventListener mPostListener;
@@ -52,6 +60,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,11 +82,12 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             navigationView.setNavigationItemSelectedListener(this);
 
 
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Get post key from intent
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         mPostTitle = getIntent().getStringExtra(ChatActivity.EXTRA_POST_TITLE);
+        mPostAuthorUID = getIntent().getStringExtra(ChatActivity.EXTRA_POST_AUTHOR);
         if (mPostKey == null) {
             throw new IllegalArgumentException("Must pass EXTRA_POST_KEY");
         }
@@ -116,7 +126,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 // Get Post object and use the values to update the UI
                 Post post = dataSnapshot.getValue(Post.class);
                 // [START_EXCLUDE]
-                mAuthorView.setText(post.author);
+                mAuthorView.setText(post.authorName);
                 mTitleView.setText(post.title);
                 mBodyView.setText(post.body);
                 // [END_EXCLUDE]
@@ -169,6 +179,15 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void chat() {
+
+
+        Chat chat = new Chat(mPostTitle, getName(), getUid(), mPostKey);
+        Map<String, Object> chatValues = chat.toMap();
+        String date = sDateFormat.format(new Date());
+        mDatabase.child("user-messages").child(getUid()).child(mPostKey).setValue(chatValues);
+        mDatabase.child("user-messages").child(mPostAuthorUID).child(mPostKey).setValue(chatValues);
+
+
         Intent intent = new Intent(PostDetailActivity.this, ChatActivity.class);
         intent.putExtra(ChatActivity.EXTRA_POST_KEY, mPostKey);
         intent.putExtra(ChatActivity.EXTRA_POST_TITLE, mPostTitle);
@@ -204,6 +223,23 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
                 });
     }
 
+    public String getUid() {
+
+        return getInstance().getCurrentUser().getUid();
+    }
+
+    public String getName() {
+        String email = getInstance().getCurrentUser().getEmail();
+        return usernameFromEmail(email);
+    }
+
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
+    }
 
     private class CommentAdapter extends RecyclerView.Adapter<CommentViewHolder> {
 
@@ -341,4 +377,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         }
 
     }
+
+
 }

@@ -31,7 +31,7 @@ public class Review {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("author", author);
+        result.put("authorName", author);
         result.put("text", text);
         result.put("authorPhotoURL", authorPhotoURL);
 

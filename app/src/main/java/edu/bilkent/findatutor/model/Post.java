@@ -13,8 +13,8 @@ public class Post {
 
     private static SimpleDateFormat sDateFormat = new SimpleDateFormat("EEE, d MMM yyyy");
     public boolean isRequested;
-    public String uid;
-    public String author;
+    public String authorUID;
+    public String authorName;
     public String title;
     public String body;
     public String subject;
@@ -35,8 +35,8 @@ public class Post {
 
     public Post(String uid, String author, String title, String body, String subject,
                 String language, String school, String price, String date, boolean isRequested, String photoURL) {
-        this.uid = uid;
-        this.author = author;
+        this.authorUID = uid;
+        this.authorName = author;
         this.title = title;
         this.body = body;
         this.subject = subject;
@@ -53,8 +53,8 @@ public class Post {
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("uid", uid);
-        result.put("author", author);
+        result.put("authorUID", authorUID);
+        result.put("authorName", authorName);
         result.put("title", title);
         result.put("body", body);
         result.put("viewsCount", viewsCount);

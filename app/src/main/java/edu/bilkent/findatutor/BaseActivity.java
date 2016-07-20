@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         int id = item.getItemId();
 
         if (id == R.id.nav_ads) {
-            startActivity(new Intent(this, PostListMainActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
 
         } else if (id == R.id.nav_profile) {
 

@@ -298,8 +298,8 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         // Write new modelUser
         writeNewUser(user.getUid(), username, email, photoUrl);
 
-        // Go to PostListMainActivity
-        Intent intent = new Intent(SignInActivity.this, PostListMainActivity.class);
+        // Go to MainActivity
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("email", email);
         startActivity(intent);
@@ -376,8 +376,8 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         // Write new modelUser
         writeNewUser(user.getUid(), username, email);
 
-        // Go to PostListMainActivity
-        Intent intent = new Intent(SignInActivity.this, PostListMainActivity.class);
+        // Go to MainActivity
+        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
         intent.putExtra("username", username);
         intent.putExtra("email", email);
         startActivity(intent);

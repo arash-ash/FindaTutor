@@ -27,10 +27,10 @@ import edu.bilkent.findatutor.fragments.RecentPostsFragment;
 import edu.bilkent.findatutor.fragments.RecentRequestedPostsFragment;
 import edu.bilkent.findatutor.misc.ChildEventAdaptor;
 
-public class PostListMainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity {
 
 
-    private static final String TAG = "PostListMainActivity";
+    private static final String TAG = "MainActivity";
 
     private FragmentPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
@@ -64,7 +64,8 @@ public class PostListMainActivity extends BaseActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MyChildEventListener());
+        mDatabase.child("notifications").child(getUid()).addChildEventListener(new NotificationChildEventListener());
+        mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MessagesChildEventListener());
 
 
 
@@ -106,7 +107,7 @@ public class PostListMainActivity extends BaseActivity {
         findViewById(R.id.fab_new_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PostListMainActivity.this, NewPostActivity.class);
+                Intent intent = new Intent(MainActivity.this, NewPostActivity.class);
                 intent.putExtra("username", username);
                 intent.putExtra("email", email);
                 startActivity(intent);
@@ -136,7 +137,15 @@ public class PostListMainActivity extends BaseActivity {
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
-    class MyChildEventListener extends ChildEventAdaptor {
+    class NotificationChildEventListener extends ChildEventAdaptor {
+
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            sendNotification("You got a new notification!");
+        }
+    }
+
+    class MessagesChildEventListener extends ChildEventAdaptor {
 
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {

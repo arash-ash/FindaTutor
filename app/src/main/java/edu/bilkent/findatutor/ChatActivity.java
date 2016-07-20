@@ -47,9 +47,11 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
     public static final String EXTRA_POST_KEY = "post_key";
     public static final String EXTRA_POST_TITLE = "post_title";
     public static final String EXTRA_POST_USER = "extra_post_user";
+    public static final String EXTRA_POST_AUTHOR = "post_author";
 
 
     public static final String TAG = "ChatActivity";
+
 
     private ArrayList<Message> mMessages;
     private MessagesAdapter mAdapter;
