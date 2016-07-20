@@ -1,7 +1,11 @@
 package edu.bilkent.findatutor.model;
 
+import com.google.firebase.database.Exclude;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by arash on 7/13/16.
@@ -11,16 +15,29 @@ public class Notification {
     private String title;
     private String text;
     private String tag;
-    private Date createdDate;
+    private String createdDate;
 
-    public Notification(String title, Date date, String tag, String text) {
+    public Notification(String title, String tag, String text) {
         this.title = title;
-        this.createdDate = date;
+        this.createdDate = (new Date()).toString();
         this.tag = tag;
         this.text = text;
     }
 
-    public Date getDate() {
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("title", title);
+        result.put("text", text);
+        result.put("tag", tag);
+        result.put("created-date", createdDate);
+//        result.put("createdDate", sDateFormat.format(createdDate));
+//        result.put("lastMessageDate", sDateFormat.format(lastMessageDate));
+
+        return result;
+    }
+
+    public String getDate() {
         return createdDate;
     }
 

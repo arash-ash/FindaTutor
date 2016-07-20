@@ -43,23 +43,14 @@
             tools:context="edu.bilkent.findatutor.PostDetailActivity">
 
             <include
-                android:id="@+id/post_author_layout"
-                layout="@layout/include_post_author"
+                android:id="@+id/post_text_layout"
+                layout="@layout/item_post_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="60dp" />
-
-            <include
-                android:id="@+id/post_text_layout"
-                layout="@layout/include_post_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/post_author_layout" />
 
             <LinearLayout
                 android:id="@+id/comment_form"
@@ -75,7 +66,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1.00"
-                    android:hint="Write a review..."
+                    android:hint="Write a comment..."
                     android:maxLines="1" />
 
                 <Button
@@ -96,19 +87,16 @@
                 tools:listitem="@layout/item_comment" />
 
 
-            <Button
-                android:id="@+id/message_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
-                android:layout_width="0dp"
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_new_post"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/post_author_layout"
-                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="50dp"
-                android:layout_toEndOf="@+id/post_author_layout"
-                android:layout_toRightOf="@+id/post_author_layout"
-                android:layout_weight="0.2"
-                android:text="Message" />
+                android:layout_margin="16dp"
+                android:longClickable="false"
+                android:nestedScrollingEnabled="false"
+                android:src="@drawable/ic_navigation_check_24" />
 
         </RelativeLayout>
 

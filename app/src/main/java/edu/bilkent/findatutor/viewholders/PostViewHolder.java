@@ -33,7 +33,7 @@ public class PostViewHolder extends RecyclerView.ViewHolder {
         ratingBar = (RatingBar) itemView.findViewById(R.id.rating);
         priceView = (TextView) itemView.findViewById(R.id.post_price);
         languageView = (TextView) itemView.findViewById(R.id.post_language);
-        schoolView = (TextView) itemView.findViewById(R.id.course_title);
+        schoolView = (TextView) itemView.findViewById(R.id.post_school);
         imageView = (ImageView) itemView.findViewById(R.id.post_author_photo);
 
 

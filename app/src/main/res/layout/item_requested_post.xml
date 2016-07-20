@@ -37,17 +37,17 @@
             android:layout_below="@+id/post_author_layout"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/course_title"
-            android:layout_toStartOf="@+id/course_title" />
+            android:layout_toLeftOf="@+id/post_school"
+            android:layout_toStartOf="@+id/post_school" />
 
         <TextView
-            android:id="@+id/course_title"
+            android:id="@+id/post_school"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/include"
-            android:layout_marginTop="23dp"
+            android:layout_marginTop="0dp"
             android:gravity="right"
             android:text="Bilkent University"
             android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/post_language"
             android:layout_alignRight="@+id/post_language"
-            android:layout_below="@+id/course_title"
+            android:layout_below="@+id/post_school"
             android:text="30 TL/hour"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -77,9 +77,10 @@
             android:id="@+id/post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/post_author_layout"
-            android:layout_alignEnd="@+id/star_layout"
-            android:layout_alignRight="@+id/star_layout"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/star_layout"
+            android:layout_marginTop="5dp"
             android:text="29 June"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 

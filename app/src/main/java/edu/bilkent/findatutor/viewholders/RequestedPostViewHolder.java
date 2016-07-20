@@ -33,7 +33,7 @@ public class RequestedPostViewHolder extends RecyclerView.ViewHolder {
         //ratingBar = (RatingBar) itemView.findViewById(R.id.rating);
         priceView = (TextView) itemView.findViewById(R.id.post_price);
         languageView = (TextView) itemView.findViewById(R.id.post_language);
-        schoolView = (TextView) itemView.findViewById(R.id.course_title);
+        schoolView = (TextView) itemView.findViewById(R.id.post_school);
         dateView = (TextView) itemView.findViewById(R.id.post_date);
         imageView = (ImageView) itemView.findViewById(R.id.post_author_photo);
     }

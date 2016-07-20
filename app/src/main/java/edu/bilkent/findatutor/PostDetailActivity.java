@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,13 +48,21 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private static final String TAG = "PostDetailActivity";
     private static SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddmmss");
     public Button messageButton;
-    String mPostAuthorUID;
     private DatabaseReference mPostReference;
     private DatabaseReference mCommentsReference;
     private ValueEventListener mPostListener;
+    private String mPostPrice;
+    private String mPostSchool;
+    private String mPostLanguage;
+    private String mPostAuthorPhotoURL;
+    private String mPostAuthorUID;
     private String mPostKey;
     private String mPostTitle;
     private CommentAdapter mAdapter;
+    private TextView mPostPriceView;
+    private TextView mPostLanguageView;
+    private TextView mPostSchoolView;
+    private ImageView mPostAuthorPhoto;
     private TextView mAuthorView;
     private TextView mTitleView;
     private TextView mBodyView;
@@ -76,7 +85,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
             drawer.setDrawerListener(toggle);
             toggle.syncState();
         }
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
@@ -88,9 +96,10 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mPostKey = getIntent().getStringExtra(EXTRA_POST_KEY);
         mPostTitle = getIntent().getStringExtra(ChatActivity.EXTRA_POST_TITLE);
         mPostAuthorUID = getIntent().getStringExtra(ChatActivity.EXTRA_POST_AUTHOR);
-        if (mPostKey == null) {
-            throw new IllegalArgumentException("Must pass EXTRA_POST_KEY");
-        }
+        mPostAuthorPhotoURL = getIntent().getStringExtra("photoURL");
+        mPostPrice = getIntent().getStringExtra("price");
+        mPostLanguage = getIntent().getStringExtra("language");
+        mPostSchool = getIntent().getStringExtra("school");
 
         // Initialize Database
         mPostReference = FirebaseDatabase.getInstance().getReference()
@@ -106,7 +115,21 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mCommentButton = (Button) findViewById(R.id.button_post_comment);
         mCommentsRecycler = (RecyclerView) findViewById(R.id.recycler_comments);
         messageButton = (Button) findViewById(R.id.message_button);
+        mPostAuthorPhoto = (ImageView) findViewById(R.id.post_author_photo);
+        mPostPriceView = (TextView) findViewById(R.id.post_price);
+        mPostLanguageView = (TextView) findViewById(R.id.post_language);
+        mPostSchoolView = (TextView) findViewById(R.id.post_school);
 
+
+        mPostPriceView.setText(mPostPrice);
+        mPostSchoolView.setText(mPostSchool);
+        mPostLanguageView.setText(mPostLanguage);
+
+        Glide
+                .with(PostDetailActivity.this)
+                .load(mPostAuthorPhotoURL)
+                .transform(new CircleTransform(getBaseContext()))
+                .into(mPostAuthorPhoto);
 
         messageButton.setOnClickListener(this);
         mCommentButton.setOnClickListener(this);

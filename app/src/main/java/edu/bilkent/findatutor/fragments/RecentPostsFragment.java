@@ -89,6 +89,12 @@ public class RecentPostsFragment extends Fragment {
                         intent.putExtra(ChatActivity.EXTRA_POST_TITLE, model.title);
                         intent.putExtra(ChatActivity.EXTRA_POST_USER, getUid());
                         intent.putExtra(ChatActivity.EXTRA_POST_AUTHOR, model.authorUID);
+                        intent.putExtra("photoURL", model.authorPhotoUrl);
+                        intent.putExtra("price", model.price);
+                        intent.putExtra("language", model.language);
+                        intent.putExtra("school", model.school);
+
+
                         startActivity(intent);
                     }
                 });
