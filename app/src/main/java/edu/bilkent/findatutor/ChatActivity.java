@@ -29,11 +29,11 @@ import java.util.Date;
 
 import edu.bilkent.findatutor.model.Message;
 
-import static edu.bilkent.findatutor.MessageSource.MessagesCallbacks;
-import static edu.bilkent.findatutor.MessageSource.MessagesListener;
-import static edu.bilkent.findatutor.MessageSource.addMessagesListener;
-import static edu.bilkent.findatutor.MessageSource.saveMessage;
-import static edu.bilkent.findatutor.MessageSource.stop;
+import static edu.bilkent.findatutor.misc.MessageSource.MessagesCallbacks;
+import static edu.bilkent.findatutor.misc.MessageSource.MessagesListener;
+import static edu.bilkent.findatutor.misc.MessageSource.addMessagesListener;
+import static edu.bilkent.findatutor.misc.MessageSource.saveMessage;
+import static edu.bilkent.findatutor.misc.MessageSource.stop;
 
 /**
  * Created by linus on 08.07.2016.

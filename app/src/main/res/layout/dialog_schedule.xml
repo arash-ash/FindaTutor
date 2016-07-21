@@ -1,41 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:weightSum="1">
 
 
     <TableLayout
         android:id="@+id/tableLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="236dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="0.11">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
 
         </TableRow>
 
         <TableRow
             android:layout_width="375dp"
-            android:layout_height="52dp">
+            android:layout_height="52dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
+
+            <LinearLayout android:weightSum="1">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="5"
+                android:layout_marginLeft="100dp"
+                android:layout_marginRight="10dp"
                 android:text="Morning"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -44,6 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="6"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="0dp"
                 android:text="Afternoon"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -53,9 +64,12 @@
                 android:layout_height="wrap_content"
                 android:layout_column="12"
                 android:layout_gravity="right"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="0dp"
+                android:layout_weight="0.78"
                 android:text="Evening"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+            </LinearLayout>
 
         </TableRow>
 
@@ -63,6 +77,8 @@
             android:id="@+id/tableRow1"
             android:layout_width="375dp"
             android:layout_height="67dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -71,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Mon"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -80,6 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple" />
@@ -91,7 +109,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -100,13 +118,16 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
 
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
 
         </TableRow>
 
@@ -114,6 +135,8 @@
             android:id="@+id/tableRow2"
             android:layout_width="375dp"
             android:layout_height="67dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -122,6 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Tue"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -131,6 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
@@ -143,7 +168,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -152,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
 
@@ -160,6 +186,8 @@
             android:id="@+id/tableRow3"
             android:layout_width="375dp"
             android:layout_height="67dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -168,6 +196,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Wed"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -177,6 +206,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple" />
@@ -188,7 +218,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -197,6 +227,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
 
@@ -205,6 +236,8 @@
             android:id="@+id/tableRow4"
             android:layout_width="375dp"
             android:layout_height="67dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -213,6 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Thu"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -222,6 +256,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple" />
@@ -233,7 +268,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -242,6 +277,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
 
@@ -250,6 +286,8 @@
             android:id="@+id/tableRow5"
             android:layout_width="375dp"
             android:layout_height="67dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -258,6 +296,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Fri"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -267,6 +306,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
@@ -279,7 +319,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -288,6 +328,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
 
@@ -295,6 +336,8 @@
             android:id="@+id/tableRow6"
             android:layout_width="375dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -303,6 +346,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Sat"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -312,6 +356,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple" />
@@ -323,7 +368,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -332,12 +377,15 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
 
         <TableRow
             android:layout_width="375dp"
-            android:layout_height="43dp">
+            android:layout_height="43dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp">
 
         </TableRow>
 
@@ -345,6 +393,8 @@
             android:id="@+id/tableRow7"
             android:layout_width="375dp"
             android:layout_height="67dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:gravity="right">
 
@@ -353,6 +403,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
+                android:layout_marginRight="10dp"
                 android:text="Sun"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -362,6 +413,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="2"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:button="@null"
                 android:checked="false"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
@@ -374,7 +426,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
 
             <CheckBox
@@ -383,6 +435,7 @@
                 android:layout_height="wrap_content"
                 android:layout_column="6"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginRight="10dp"
                 android:checked="false" />
         </TableRow>
     </TableLayout>

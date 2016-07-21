@@ -104,4 +104,12 @@
             <item>BLIS</item>
             <item>22Bahman</item>
     </string-array>
+
+
+    <string-array name="day_time_array">
+        <item>Morning</item>
+        <item>Afternoon</item>
+        <item>Evening</item>
+        <item>N/A</item>
+    </string-array>
 </resources>

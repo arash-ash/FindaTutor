@@ -1,5 +1,8 @@
 package edu.bilkent.findatutor;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +16,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +36,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Chat;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.model.Review;
+import edu.bilkent.findatutor.model.Session;
 import edu.bilkent.findatutor.model.User;
 import edu.bilkent.findatutor.viewholders.CommentViewHolder;
 
@@ -70,6 +81,12 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
     private DatabaseReference mDatabase;
+    private EditText mDateField;
+    private EditText mLocationField;
+    private Spinner mDayTimeSpinner;
+    private Session mSession;
+    private NewSessionDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +137,6 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mPostLanguageView = (TextView) findViewById(R.id.post_language);
         mPostSchoolView = (TextView) findViewById(R.id.post_school);
 
-
         mPostPriceView.setText(mPostPrice);
         mPostSchoolView.setText(mPostSchool);
         mPostLanguageView.setText(mPostLanguage);
@@ -134,6 +150,15 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         messageButton.setOnClickListener(this);
         mCommentButton.setOnClickListener(this);
         mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
+
+
+        findViewById(R.id.fab_new_session).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog = new NewSessionDialog(PostDetailActivity.this);
+                dialog.show();
+            }
+        });
 
     }
 
@@ -400,6 +425,109 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         }
 
     }
+
+
+    class NewSessionDialog extends Dialog implements android.view.View.OnClickListener {
+        private Activity c;
+        private Button yes, no;
+
+        public NewSessionDialog(Activity a) {
+            super(a);
+            this.c = a;
+        }
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            setContentView(R.layout.dialog_new_session);
+
+            yes = (Button) findViewById(R.id.btn_yes);
+            no = (Button) findViewById(R.id.btn_no);
+            yes.setOnClickListener(this);
+            no.setOnClickListener(this);
+
+            mDateField = (EditText) findViewById(R.id.edit_text_date);
+            mLocationField = (EditText) findViewById(R.id.edit_text_location);
+            mDateField.setOnClickListener(this);
+            mDayTimeSpinner = (Spinner) findViewById(R.id.spinner_daytime);
+
+            ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(PostDetailActivity.this,
+                    R.array.day_time_array, android.R.layout.simple_spinner_item);
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mDayTimeSpinner.setAdapter(adapter1);
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.edit_text_date:
+                    showDatePicker();
+                    break;
+                case R.id.btn_yes:
+                    c.finish();
+                    request();
+                    break;
+                case R.id.btn_no:
+                    dismiss();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+        private void request() {
+
+            String date = sDateFormat.format(new Date());
+
+
+            mSession = new Session(mPostAuthorUID, getUid(), mPostKey, mDateField.getText().toString(),
+                    mDayTimeSpinner.getSelectedItem().toString(), mLocationField.getText().toString());
+
+            Map<String, Object> sessionValues = mSession.toMap();
+
+            Map<String, Object> childUpdates = new HashMap<>();
+
+
+            childUpdates.put("/user-sessions/" + getUid() + "/" + date, sessionValues);
+            childUpdates.put("/user-sessions/" + mPostAuthorUID + "/" + date, sessionValues);
+
+            mDatabase.updateChildren(childUpdates);
+        }
+
+        private void showDatePicker() {
+            final Calendar myCalendar = Calendar.getInstance();
+            final DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                      int dayOfMonth) {
+                    myCalendar.set(Calendar.YEAR, year);
+                    myCalendar.set(Calendar.MONTH, monthOfYear);
+                    myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    updateLabel();
+                }
+
+                private void updateLabel() {
+
+                    String myFormat = "MM/dd/yy";
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                    mDateField.setText(sdf.format(myCalendar.getTime()));
+                }
+            };
+
+
+            new DatePickerDialog(PostDetailActivity.this, datePicker, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+        }
+
+    }
+
+
 
 
 }

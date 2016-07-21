@@ -12,7 +12,6 @@ import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import edu.bilkent.findatutor.misc.ChildEventAdaptor;
 
@@ -37,9 +36,9 @@ public class NotificationsListener extends Application {
         super.onCreate();
         // this method fires once as well as constructor
         // but also application has context here
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("notifications").child(getUid()).addChildEventListener(new NotificationChildEventListener());
-        mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MessagesChildEventListener());
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase.child("notifications").child(getUid()).addChildEventListener(new NotificationChildEventListener());
+//        mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MessagesChildEventListener());
         Log.i("main", "onCreate fired");
     }
 
