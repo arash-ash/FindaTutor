@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import edu.bilkent.findatutor.MessageListActivity;
 import edu.bilkent.findatutor.NotificationListActivity;
@@ -38,10 +39,12 @@ public class NotificationsListener extends Application {
         super.onCreate();
         // this method fires once as well as constructor
         // but also application has context here
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        mDatabase.child("notifications").child(getUid()).addChildEventListener(new NotificationChildEventListener());
-//        mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MessagesChildEventListener());
-        Log.i("main", "onCreate fired");
+        if (getUid() != null) {
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase.child("user-notifications").child(getUid()).addChildEventListener(new NotificationChildEventListener());
+            //mDatabase.child("user-messages").child(getUid()).addChildEventListener(new MessagesChildEventListener());
+            Log.i("main", "onCreate fired");
+        }
     }
 
     private void sendMessageNotification(String messageBody) {

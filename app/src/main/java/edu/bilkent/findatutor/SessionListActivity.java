@@ -109,7 +109,7 @@ public class SessionListActivity extends BaseActivity {
     public Query getQuery(DatabaseReference databaseReference) {
         // Last 100 posts, these are automatically the 100 most recent
         // due to sorting by push() keys
-        return databaseReference.child("user-sessions").child(getUid())
+        return databaseReference.child("user-sessions").child(getUid()).orderByChild("isTerminated").equalTo(false)
                 .limitToFirst(100);
 
     }
