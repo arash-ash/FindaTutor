@@ -1,6 +1,7 @@
 package edu.bilkent.findatutor;
 
 import android.app.DatePickerDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -208,7 +209,7 @@ public class NewPostActivity extends BaseActivity {
                         } else {
                             // Write new post
                             writeNewPost(userId, user.getUsername(), title, body, subject, language,
-                                    "For " + school, price, date, isRequested, firebaseUser.getPhotoUrl().toString());
+                                    "For " + school, price, date, isRequested, firebaseUser.getPhotoUrl());
                         }
 
                         // Finish this Activity, back to the stream
@@ -225,13 +226,18 @@ public class NewPostActivity extends BaseActivity {
 
 
     private void writeNewPost(String userId, String username, String title, String body, String subject,
-                              String language, String school, String price, String date, boolean isReq, String photoURL) {
+                              String language, String school, String price, String date, boolean isReq, Uri photoURL) {
         // Create new post at /modelUser-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
 
+        String url;
+        if (photoURL != null)
+            url = photoURL.toString();
+        else
+            url = "https://lh3.googleusercontent.com/-EF9BoynKc9w/AAAAAAAAAAI/AAAAAAAAAAA/1au5roMkCC4/photo.jpg";
 
-        Post post = new Post(userId, username, title, body, subject, language, school, price, date, isReq, photoURL);
+        Post post = new Post(userId, username, title, body, subject, language, school, price, date, isReq, url);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

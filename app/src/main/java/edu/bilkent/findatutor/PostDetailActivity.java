@@ -45,6 +45,7 @@ import java.util.Map;
 
 import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Chat;
+import edu.bilkent.findatutor.model.Notification;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.model.Review;
 import edu.bilkent.findatutor.model.Session;
@@ -86,6 +87,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private Spinner mDayTimeSpinner;
     private Session mSession;
     private NewSessionDialog dialog;
+    private String mPostAuthor;
 
 
     @Override
@@ -117,6 +119,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mPostPrice = getIntent().getStringExtra("price");
         mPostLanguage = getIntent().getStringExtra("language");
         mPostSchool = getIntent().getStringExtra("school");
+        mPostAuthor = getIntent().getStringExtra("author");
 
         // Initialize Database
         mPostReference = FirebaseDatabase.getInstance().getReference()
@@ -229,7 +232,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private void chat() {
 
 
-        Chat chat = new Chat(mPostTitle, getName(), getUid(), mPostKey);
+        Chat chat = new Chat(mPostTitle, getName(), getUid(), mPostKey, getPhotoURL());
         Map<String, Object> chatValues = chat.toMap();
         String date = sDateFormat.format(new Date());
         mDatabase.child("user-messages").child(getUid()).child(mPostKey).setValue(chatValues);
@@ -240,6 +243,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         intent.putExtra(ChatActivity.EXTRA_POST_KEY, mPostKey);
         intent.putExtra(ChatActivity.EXTRA_POST_TITLE, mPostTitle);
         intent.putExtra(ChatActivity.EXTRA_POST_USER, getUid());
+
         startActivity(intent);
     }
 
@@ -275,6 +279,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
         return getInstance().getCurrentUser().getUid();
     }
+
 
     public String getName() {
         String email = getInstance().getCurrentUser().getEmail();
@@ -485,17 +490,37 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
 
             mSession = new Session(mPostAuthorUID, getUid(), mPostKey, mDateField.getText().toString(),
-                    mDayTimeSpinner.getSelectedItem().toString(), mLocationField.getText().toString());
-
+                    mDayTimeSpinner.getSelectedItem().toString(), mLocationField.getText().toString(),
+                    mPostTitle, mPostAuthor, mPostAuthorPhotoURL);
             Map<String, Object> sessionValues = mSession.toMap();
-
             Map<String, Object> childUpdates = new HashMap<>();
-
-
             childUpdates.put("/user-sessions/" + getUid() + "/" + date, sessionValues);
             childUpdates.put("/user-sessions/" + mPostAuthorUID + "/" + date, sessionValues);
-
             mDatabase.updateChildren(childUpdates);
+
+
+            Map<String, Object> childUpdates2 = new HashMap<>();
+            Notification mNotif = new Notification("New Session!", "session",
+                    "You got a new session for " + mPostTitle);
+            Map<String, Object> notifValues = mNotif.toMap();
+            childUpdates2.put("/user-notifications/" + getUid() + "/" + date, notifValues);
+            childUpdates2.put("/user-notifications/" + mPostAuthorUID + "/" + date, notifValues);
+            mDatabase.updateChildren(childUpdates2);
+
+
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("message/rfc822");
+            i.putExtra(Intent.EXTRA_EMAIL, new String[]{"arash.asn94@gmail.com"});
+            i.putExtra(Intent.EXTRA_SUBJECT, "New session request!");
+            i.putExtra(Intent.EXTRA_TEXT, "Hi there, \n \n  I found your advertisement for " + mPostTitle + " on findAtutor app." +
+                    " will you be able to have a session with me on " + mSession.getSessionDate() + " " + mSession.getDayTime() +
+                    " at " + mSession.getPreferedLocation() + "?\n \n" + "Best Regards,\n" + getName());
+            try {
+                startActivity(Intent.createChooser(i, "Send mail..."));
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(PostDetailActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+            }
+            startActivity(i);
         }
 
         private void showDatePicker() {

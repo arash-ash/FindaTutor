@@ -18,18 +18,20 @@ public class Chat {
     private Date createdDate;
     private Date lastMessageDate;
     private String senderUID;
+    private String senderURL;
     private String postUID;
 
 
     public Chat() {
     }
 
-    public Chat(String title, String sender, String senderUID, String postUID) {
+    public Chat(String title, String sender, String senderUID, String postUID, String senderURL) {
         this.title = title;
         this.sender = sender;
         this.senderUID = senderUID;
         this.createdDate = new Date();
         this.postUID = postUID;
+        this.senderURL = senderURL;
     }
 
     @Exclude
@@ -39,10 +41,16 @@ public class Chat {
         result.put("sender", sender);
         result.put("senderUID", senderUID);
         result.put("postUID", postUID);
+        result.put("senderURL", senderURL);
+
 //        result.put("createdDate", sDateFormat.format(createdDate));
 //        result.put("lastMessageDate", sDateFormat.format(lastMessageDate));
 
         return result;
+    }
+
+    public String getSenderURL() {
+        return senderURL;
     }
 
     public String getTitle() {

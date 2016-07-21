@@ -93,6 +93,7 @@ public class RecentPostsFragment extends Fragment {
                         intent.putExtra("price", model.price);
                         intent.putExtra("language", model.language);
                         intent.putExtra("school", model.school);
+                        intent.putExtra("author", model.authorName);
 
 
                         startActivity(intent);

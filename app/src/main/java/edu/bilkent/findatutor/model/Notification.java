@@ -17,6 +17,10 @@ public class Notification {
     private String tag;
     private String createdDate;
 
+    public Notification() {
+
+    }
+
     public Notification(String title, String tag, String text) {
         this.title = title;
         this.createdDate = (new Date()).toString();

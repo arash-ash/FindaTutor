@@ -46,6 +46,16 @@ public class MainActivity extends BaseActivity {
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
 
+//        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
+//        ImageView imageView = (ImageView)headerView.findViewById(R.id.imageView);
+//
+//        String url = getPhotoURL();
+//        Glide
+//                .with(MainActivity.this)
+//                .load(url)
+//                .transform(new CircleTransform(getBaseContext()))
+//                .into(imageView);
+
 
         username = getIntent().getStringExtra("username");
         email = getIntent().getStringExtra("email");

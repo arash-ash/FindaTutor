@@ -23,7 +23,6 @@ import edu.bilkent.findatutor.viewholders.NotifViewHolder;
 public class NotificationListActivity extends BaseActivity {
 
     private static final String TAG = "NotifListActivity";
-    private String mPostKey;
 
     private DatabaseReference mDatabase;
 
@@ -38,7 +37,7 @@ public class NotificationListActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_notifications);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -72,7 +71,7 @@ public class NotificationListActivity extends BaseActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mRecycler = (RecyclerView) findViewById(R.id.messages_list);
+        mRecycler = (RecyclerView) findViewById(R.id.notification_list);
         mRecycler.setHasFixedSize(true);
 
         // Set up Layout Manager, reverse layout
@@ -82,15 +81,11 @@ public class NotificationListActivity extends BaseActivity {
         mRecycler.setLayoutManager(mManager);
 
         // Set up FirebaseRecyclerAdapter with the Query
-        Query postsQuery = getQuery(mDatabase);
+        Query notifsQuery = getQuery(mDatabase);
         mAdapter = new FirebaseRecyclerAdapter<Notification, NotifViewHolder>(Notification.class, R.layout.item_notification,
-                NotifViewHolder.class, postsQuery) {
+                NotifViewHolder.class, notifsQuery) {
             @Override
             protected void populateViewHolder(final NotifViewHolder viewHolder, final Notification model, final int position) {
-                final DatabaseReference postRef = getRef(position);
-
-                // Set click listener for the whole post view
-                final String postKey = postRef.getKey();
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

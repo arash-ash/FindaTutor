@@ -28,7 +28,6 @@ public class Post {
     public float rating;
     private String createdDate;
 
-
     public Post() {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
@@ -49,6 +48,61 @@ public class Post {
         this.authorPhotoUrl = photoURL;
     }
 
+    public float getRating() {
+        return rating;
+    }
+
+    public int getSessionsCount() {
+        return sessionsCount;
+    }
+
+    public int getViewsCount() {
+        return viewsCount;
+    }
+
+    public String getAuthorPhotoUrl() {
+        return authorPhotoUrl;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public String getAuthorUID() {
+        return authorUID;
+    }
+
+    public boolean isRequested() {
+        return isRequested;
+    }
 
     @Exclude
     public Map<String, Object> toMap() {

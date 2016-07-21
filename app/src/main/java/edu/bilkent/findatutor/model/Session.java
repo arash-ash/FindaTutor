@@ -24,9 +24,18 @@ public class Session {
     private boolean isWithdrawn;
     private String dayTime;
     private String preferedLocation;
+    private String postTitle;
+    private String tutorName;
+    private String authorURL;
+
+
+    public Session() {
+    }
 
     public Session(String tutorUID, String studentUID, String postUID, String sessionDate,
-                   String dayTime, String preferedLocation) {
+                   String dayTime, String preferedLocation, String postTitle, String tutorName, String authorURL) {
+
+
         this.tutorUID = tutorUID;
         this.studentUID = studentUID;
         this.postUID = postUID;
@@ -36,6 +45,9 @@ public class Session {
         this.isWithdrawn = false;
         this.dayTime = dayTime;
         this.preferedLocation = preferedLocation;
+        this.postTitle = postTitle;
+        this.tutorName = tutorName;
+        this.authorURL = authorURL;
     }
 
     @Exclude
@@ -50,6 +62,10 @@ public class Session {
         result.put("isWithdrawn", isWithdrawn);
         result.put("dayTime", dayTime);
         result.put("preferedLocation", preferedLocation);
+        result.put("postTitle", postTitle);
+        result.put("tutorName", tutorName);
+        result.put("authorURL", authorURL);
+
         return result;
     }
 
@@ -63,8 +79,64 @@ public class Session {
 
     }
 
+    public String getAuthorURL() {
+        return authorURL;
+    }
+
+    public String getDayTime() {
+        return dayTime;
+    }
+
+    public String getPostTitle() {
+        return postTitle;
+    }
+
+    public String getPreferedLocation() {
+        return preferedLocation;
+    }
+
+    public boolean isWithdrawn() {
+        return isWithdrawn;
+    }
+
+    public boolean isTerminated() {
+        return isTerminated;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public String getSessionDate() {
+        return sessionDate;
+    }
+
+    public Chat getMessages() {
+        return messages;
+    }
+
+    public Review getReview() {
+        return review;
+    }
+
+    public String getPostUID() {
+        return postUID;
+    }
+
+    public String getStudentUID() {
+        return studentUID;
+    }
+
+    public String getTutorUID() {
+        return tutorUID;
+    }
+
     public void review(String text, float rating) {
         review.setText(text);
         review.setRating(rating);
+    }
+
+    public String getTutorName() {
+        return tutorName;
     }
 }

@@ -1,14 +1,8 @@
 package edu.bilkent.findatutor;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,11 +10,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Chat;
 import edu.bilkent.findatutor.viewholders.MessageViewHolder;
 
@@ -30,8 +26,6 @@ import edu.bilkent.findatutor.viewholders.MessageViewHolder;
 public class MessageListActivity extends BaseActivity {
 
     private static final String TAG = "MessageListActivity";
-    private String mPostKey;
-
     private DatabaseReference mDatabase;
 
     private FirebaseRecyclerAdapter<Chat, MessageViewHolder> mAdapter;
@@ -81,10 +75,7 @@ public class MessageListActivity extends BaseActivity {
                 MessageViewHolder.class, postsQuery) {
             @Override
             protected void populateViewHolder(final MessageViewHolder viewHolder, final Chat model, final int position) {
-                final DatabaseReference postRef = getRef(position);
 
-                // Set click listener for the whole post view
-                final String postKey = postRef.getKey();
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -105,32 +96,18 @@ public class MessageListActivity extends BaseActivity {
                         // Neeed to write to both places the post is stored
                     }
                 });
+
+
+                String url = model.getSenderURL();
+                Glide
+                        .with(MessageListActivity.this)
+                        .load(url)
+                        .transform(new CircleTransform(getBaseContext()))
+                        .into(viewHolder.imageView);
             }
         };
         mRecycler.setAdapter(mAdapter);
 
-    }
-
-
-    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, NotificationListActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.findatutor_icon)
-                .setContentTitle("Notification")
-                .setContentText(messageBody)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 
 

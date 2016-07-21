@@ -2,6 +2,7 @@ package edu.bilkent.findatutor.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import edu.bilkent.findatutor.R;
@@ -16,6 +17,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 
     public TextView titleView;
     public TextView senderView;
+    public ImageView imageView;
 
 
 
@@ -23,6 +25,7 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         titleView = (TextView) itemView.findViewById(R.id.post_school);
         senderView = (TextView) itemView.findViewById(R.id.post_author);
+        imageView = (ImageView) itemView.findViewById((R.id.post_author_photo));
     }
 
 

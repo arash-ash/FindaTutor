@@ -10,6 +10,8 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.google.firebase.auth.FirebaseAuth.getInstance;
+
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,6 +46,14 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         return FirebaseAuth.getInstance().getCurrentUser().getEmail();
     }
 
+    public String getPhotoURL() {
+
+        if (getInstance().getCurrentUser().getPhotoUrl() != null)
+            return getInstance().getCurrentUser().getPhotoUrl().toString();
+        else
+            return "https://lh3.googleusercontent.com/-EF9BoynKc9w/AAAAAAAAAAI/AAAAAAAAAAA/1au5roMkCC4/photo.jpg";
+    }
+
 
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -64,6 +74,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             startActivity(new Intent(this, MessageListActivity.class));
 
         } else if (id == R.id.nav_sessions) {
+            startActivity(new Intent(this, SessionListActivity.class));
 
         } else if (id == R.id.nav_statistics) {
 
