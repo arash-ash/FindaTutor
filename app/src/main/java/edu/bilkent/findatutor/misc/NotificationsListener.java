@@ -90,8 +90,10 @@ public class NotificationsListener extends Application {
     }
 
     public String getUid() {
-
-        return getInstance().getCurrentUser().getUid();
+        if (getInstance().getCurrentUser() != null)
+            return getInstance().getCurrentUser().getUid();
+        else
+            return "";
     }
 
     class NotificationChildEventListener extends ChildEventAdaptor {

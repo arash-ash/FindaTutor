@@ -510,7 +510,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
 
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("message/rfc822");
-            i.putExtra(Intent.EXTRA_EMAIL, new String[]{"arash.asn94@gmail.com"});
+            i.putExtra(Intent.EXTRA_EMAIL, new String[]{mPostAuthor + "@gmail.com"});
             i.putExtra(Intent.EXTRA_SUBJECT, "New session request!");
             i.putExtra(Intent.EXTRA_TEXT, "Hi there, \n \n  I found your advertisement for " + mPostTitle + " on findAtutor app." +
                     " will you be able to have a session with me on " + mSession.getSessionDate() + " " + mSession.getDayTime() +

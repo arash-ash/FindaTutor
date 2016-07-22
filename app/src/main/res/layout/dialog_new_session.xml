@@ -12,7 +12,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:layout_marginBottom="15dp"
-        android:text="Fill in your session request information"
+        android:text="@string/fill_in_your_session_request_information"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -27,7 +27,7 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="date:"
+            android:hint="@string/date"
             android:inputType="date" />
 
         <Spinner
@@ -43,7 +43,7 @@
         android:id="@+id/edit_text_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="prefered location:" />
+        android:hint="@string/prefered_location" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:text="Request"
+            android:text="@string/request"
             android:textStyle="bold" />
 
         <Button
@@ -69,7 +69,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textStyle="bold" />
     </LinearLayout>
 
