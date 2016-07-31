@@ -11,10 +11,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import edu.bilkent.findatutor.fragments.MyPostsFragment;
 import edu.bilkent.findatutor.fragments.RecentPostsFragment;
 import edu.bilkent.findatutor.fragments.RecentRequestedPostsFragment;
+import edu.bilkent.findatutor.misc.CircleTransform;
 
 public class MainActivity extends BaseActivity {
 
@@ -23,13 +28,13 @@ public class MainActivity extends BaseActivity {
 
     private FragmentPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
-    private String username;
-    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -46,19 +51,27 @@ public class MainActivity extends BaseActivity {
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
 
-//        View headerView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-//        ImageView imageView = (ImageView)headerView.findViewById(R.id.imageView);
-//
-//        String url = getPhotoURL();
-//        Glide
-//                .with(MainActivity.this)
-//                .load(url)
-//                .transform(new CircleTransform(getBaseContext()))
-//                .into(imageView);
+
+        View hView = navigationView.getHeaderView(0);
+        ImageView profileImage = (ImageView) hView.findViewById(R.id.imageView_profile);
+        String url = getPhotoURL();
+        Glide
+                .with(MainActivity.this)
+                .load(url)
+                .transform(new CircleTransform(getBaseContext()))
+                .into(profileImage);
+
+        TextView nav_user = (TextView) hView.findViewById(R.id.textView_username);
+        if (getUserName() == null)
+            nav_user.setText(getEmail());
+        else
+            nav_user.setText(getUserName());
 
 
-        username = getIntent().getStringExtra("username");
-        email = getIntent().getStringExtra("email");
+
+
+
+
 
 
 
@@ -102,8 +115,6 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewPostActivity.class);
-                intent.putExtra("username", username);
-                intent.putExtra("email", email);
                 startActivity(intent);
             }
         });

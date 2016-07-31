@@ -94,19 +94,46 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         if(drawer != null) {
             drawer.setDrawerListener(toggle);
             toggle.syncState();
         }
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
+
+
+        View hView = navigationView.getHeaderView(0);
+        ImageView profileImage = (ImageView) hView.findViewById(R.id.imageView_profile);
+        String url = getPhotoURL();
+        Glide
+                .with(PostDetailActivity.this)
+                .load(url)
+                .transform(new CircleTransform(getBaseContext()))
+                .into(profileImage);
+
+        TextView nav_user = (TextView) hView.findViewById(R.id.textView_username);
+        if (getUserName() == null)
+            nav_user.setText(getEmail());
+        else
+            nav_user.setText(getUserName());
+
+
+
+
+
+
+
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference();

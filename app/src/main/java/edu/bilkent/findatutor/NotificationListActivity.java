@@ -8,12 +8,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Notification;
 import edu.bilkent.findatutor.viewholders.NotifViewHolder;
 
@@ -38,18 +42,39 @@ public class NotificationListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         if (drawer != null) {
             drawer.setDrawerListener(toggle);
             toggle.syncState();
         }
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
+
+
+        View hView = navigationView.getHeaderView(0);
+        ImageView profileImage = (ImageView) hView.findViewById(R.id.imageView_profile);
+        String url = getPhotoURL();
+        Glide
+                .with(NotificationListActivity.this)
+                .load(url)
+                .transform(new CircleTransform(getBaseContext()))
+                .into(profileImage);
+
+        TextView nav_user = (TextView) hView.findViewById(R.id.textView_username);
+        if (getUserName() == null)
+            nav_user.setText(getEmail());
+        else
+            nav_user.setText(getUserName());
 
 
         // If a notification message is tapped, any data accompanying the notification

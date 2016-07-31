@@ -20,13 +20,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Date;
 
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Message;
 
 import static edu.bilkent.findatutor.misc.MessageSource.MessagesCallbacks;
@@ -67,6 +71,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -82,6 +88,25 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
+
+
+        View hView = navigationView.getHeaderView(0);
+        ImageView profileImage = (ImageView) hView.findViewById(R.id.imageView_profile);
+        String url = getPhotoURL();
+        Glide
+                .with(ChatActivity.this)
+                .load(url)
+                .transform(new CircleTransform(getBaseContext()))
+                .into(profileImage);
+
+        TextView nav_user = (TextView) hView.findViewById(R.id.textView_username);
+        if (getUserName() == null)
+            nav_user.setText(getEmail());
+        else
+            nav_user.setText(getUserName());
+
+
+
 
 
 

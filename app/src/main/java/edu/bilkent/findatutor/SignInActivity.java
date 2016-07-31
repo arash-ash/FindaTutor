@@ -1,8 +1,10 @@
 package edu.bilkent.findatutor;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import edu.bilkent.findatutor.model.User;
 
-public class SignInActivity extends BaseActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -46,6 +48,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private ProgressDialog mProgressDialog;
 
 
     @Override
@@ -109,6 +112,23 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             }
         };
     }
+
+    public void showProgressDialog() {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(getString(R.string.loading));
+            mProgressDialog.setIndeterminate(true);
+        }
+
+        mProgressDialog.show();
+    }
+
+    public void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
 
     @Override
     public void onStart() {
@@ -195,17 +215,17 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    private void revokeAccess() {
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        // [START_EXCLUDE]
-                        updateUI(false);
-                        // [END_EXCLUDE]
-                    }
-                });
-    }
+//    private void revokeAccess() {
+//        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
+//                new ResultCallback<Status>() {
+//                    @Override
+//                    public void onResult(Status status) {
+//                        // [START_EXCLUDE]
+//                        updateUI(false);
+//                        // [END_EXCLUDE]
+//                    }
+//                });
+//    }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {

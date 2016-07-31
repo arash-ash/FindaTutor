@@ -14,9 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +34,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import edu.bilkent.findatutor.misc.CircleTransform;
 import edu.bilkent.findatutor.model.Post;
 import edu.bilkent.findatutor.model.User;
 
@@ -54,7 +58,8 @@ public class NewPostActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -70,6 +75,25 @@ public class NewPostActivity extends BaseActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if(navigationView != null)
             navigationView.setNavigationItemSelectedListener(this);
+
+
+        View hView = navigationView.getHeaderView(0);
+        ImageView profileImage = (ImageView) hView.findViewById(R.id.imageView_profile);
+        String url = getPhotoURL();
+        Glide
+                .with(NewPostActivity.this)
+                .load(url)
+                .transform(new CircleTransform(getBaseContext()))
+                .into(profileImage);
+
+        TextView nav_user = (TextView) hView.findViewById(R.id.textView_username);
+        if (getUserName() == null)
+            nav_user.setText(getEmail());
+        else
+            nav_user.setText(getUserName());
+
+
+
 
 
         spinner1 = (Spinner) findViewById(R.id.spinner_subject);

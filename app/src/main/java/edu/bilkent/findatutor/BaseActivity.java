@@ -17,6 +17,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
     private ProgressDialog mProgressDialog;
 
+
     public void showProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(this);
@@ -40,13 +41,28 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     }
 
     public String getUid() {
-        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            return FirebaseAuth.getInstance().getCurrentUser().getUid();
+        else
+            return null;
     }
     public String getEmail() {
-        return FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            return FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        else
+            return null;
+    }
+
+    public String getUserName() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            return FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        else
+            return null;
     }
 
     public String getPhotoURL() {
+        if (getInstance().getCurrentUser() == null)
+            return null;
 
         if (getInstance().getCurrentUser().getPhotoUrl() != null)
             return getInstance().getCurrentUser().getPhotoUrl().toString();
