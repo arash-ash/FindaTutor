@@ -58,6 +58,7 @@ public class NewPostActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_new_post);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -131,6 +132,8 @@ public class NewPostActivity extends BaseActivity {
         findViewById(R.id.fab_submit_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                DialogFragment newFragment = new ScheduleDialog();
+//                newFragment.show(getSupportFragmentManager(), "Schedule");
                 submitPost();
             }
         });
@@ -273,5 +276,6 @@ public class NewPostActivity extends BaseActivity {
 
         mDatabase.updateChildren(childUpdates);
     }
+
 
 }

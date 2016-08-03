@@ -8,11 +8,11 @@
 
     <TableLayout
         android:id="@+id/tableLayout1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="0.11">
+        android:layout_marginTop="5dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -43,8 +43,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="5"
-                android:layout_marginLeft="100dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="15dp"
                 android:text="Morning"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -53,8 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_column="6"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="0dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="40dp"
                 android:text="Afternoon"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -109,7 +109,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox
@@ -168,7 +168,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox
@@ -218,7 +218,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox
@@ -268,7 +268,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox
@@ -319,7 +319,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox
@@ -368,7 +368,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox
@@ -426,7 +426,7 @@
                 android:layout_column="5"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="40dp"
                 android:checked="false" />
 
             <CheckBox

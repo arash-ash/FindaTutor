@@ -55,6 +55,8 @@
     <string name="prefered_location">prefered location:</string>
     <string name="request">Request</string>
     <string name="cancel">Cancel</string>
+    <string name="pick_schedule">pick your available schedule</string>
+    <string name="ok">OK</string>
 
     <string-array name="languages_array">
         <item>Language</item>
@@ -114,9 +116,33 @@
 
 
     <string-array name="day_time_array">
-        <item>Morning</item>
-        <item>Afternoon</item>
-        <item>Evening</item>
-        <item>N/A</item>
+
+        <item>Monday Morning</item>
+        <item>Monday Afternoon</item>
+        <item>Monday Evening</item>
+        <item></item>
+        <item>Tuesday Morning</item>
+        <item>Tuesday Afternoon</item>
+        <item>Tuesday Evening</item>
+        <item></item>
+        <item>Wednesday Morning</item>
+        <item>Wednesday Afternoon</item>
+        <item>Wednesday Evening</item>
+        <item></item>
+        <item>Thursday Morning</item>
+        <item>Thursday Afternoon</item>
+        <item>Thursday Evening</item>
+        <item></item>
+        <item>Friday Morning</item>
+        <item>Friday Afternoon</item>
+        <item>Friday Evening</item>
+        <item></item>
+        <item>Saturday Morning</item>
+        <item>Saturday Afternoon</item>
+        <item>Saturday Evening</item>
+        <item></item>
+        <item>Sunday Morning</item>
+        <item>Sunday Afternoon</item>
+        <item>Sunday Evening</item>
     </string-array>
 </resources>

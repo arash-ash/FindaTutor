@@ -1,34 +1,40 @@
 package edu.bilkent.findatutor.model;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by arash on 7/13/16.
  */
 public class Schedule {
 
-    final static int MON = 1;
-    final static int TUE = 2;
-    final static int WED = 3;
-    final static int THU = 4;
-    final static int FRI = 5;
-    final static int SAT = 6;
-    final static int SUN = 7;
+    private String schedule;
 
-    final static int MORNING_SESSION = 1;
-    final static int AFTERNOON_SESSION = 2;
-    final static int EVENING_SESSION = 3;
+    public Schedule(String day, String time) {
+        schedule = day + "-" + time;
 
-    private boolean[][] schedule;
-
-    public Schedule() {
-        schedule = new boolean[7][3];
     }
 
-    public void setSchedule(int day, int time, boolean setTrue) {
-        schedule[day][time] = setTrue;
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("schedule", schedule);
+        return result;
     }
 
-    public boolean getSchedule(int day, int time) {
-        return schedule[day][time];
+    public void add(String day, String time) {
+
+        schedule += " , " + day + "-" + time;
+    }
+
+    public ArrayList<String> getSchedule() {
+        ArrayList<String> list;
+        list = new ArrayList<String>(Arrays.asList(schedule.split(" , ")));
+        return list;
     }
 
 
