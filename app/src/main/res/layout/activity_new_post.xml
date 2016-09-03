@@ -42,13 +42,11 @@
                 android:id="@+id/spinner_subject"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/field_price"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/checkBox"
                 android:layout_alignParentTop="true"
-                android:layout_alignRight="@+id/field_price"
+                android:layout_alignRight="@+id/checkBox"
+                android:layout_marginRight="60dp"
                 android:layout_marginTop="60dp"
-                android:layout_toStartOf="@+id/fab_submit_post"
                 android:longClickable="true"
                 android:minHeight="70dp" />
 
@@ -86,25 +84,27 @@
                 android:layout_margin="16dp"
                 android:src="@drawable/ic_navigation_check_24" />
 
+
             <Spinner
                 android:id="@+id/spinner_school"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/checkBox"
+                android:layout_alignEnd="@+id/spinner_language"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/checkBox"
+                android:layout_alignRight="@+id/spinner_language"
                 android:layout_below="@+id/spinner_language"
+                android:layout_marginBottom="30dp"
                 android:minHeight="70dp" />
 
             <Spinner
                 android:id="@+id/spinner_language"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/spinner_school"
+                android:layout_alignEnd="@+id/field_price"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/spinner_school"
+                android:layout_alignRight="@+id/field_price"
                 android:layout_below="@+id/field_price"
                 android:minHeight="70dp" />
 
@@ -112,25 +112,13 @@
                 android:id="@+id/field_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/checkBox"
+                android:layout_alignEnd="@+id/spinner_subject"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_alignRight="@+id/checkBox"
+                android:layout_alignRight="@+id/spinner_subject"
                 android:layout_below="@+id/field_body"
                 android:gravity="left|right"
                 android:hint="@string/price_label"
-                android:inputType="textMultiLine"
-                android:maxLines="10"
-                android:scrollHorizontally="false" />
-
-            <EditText
-                android:id="@+id/field_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/checkBox"
-                android:hint="@string/request_date_hint"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:scrollHorizontally="false" />
@@ -142,11 +130,44 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/spinner_school"
-                android:layout_marginTop="40dp"
                 android:checked="false"
                 android:onClick="onCheckboxClicked"
-                android:text="are you requesting for a session?" />
+                android:text="are you requesting for a tutor?" />
 
+            <EditText
+                android:id="@+id/field_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/spinner_school"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignRight="@+id/spinner_school"
+                android:layout_below="@+id/textView12"
+                android:hint="@string/request_date_hint"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:scrollHorizontally="false" />
+
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/checkBox"
+                android:text="if so, select your session date. otherwise, select your available schedule for the offering!"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <ImageButton
+                android:id="@+id/schedule_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView12"
+                android:layout_marginLeft="160dp"
+                android:layout_toEndOf="@+id/field_date"
+                android:layout_toRightOf="@+id/field_date"
+                android:src="@android:drawable/ic_menu_today" />
         </RelativeLayout>
 
 

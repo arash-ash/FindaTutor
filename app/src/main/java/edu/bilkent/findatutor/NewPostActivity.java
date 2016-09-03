@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -52,6 +53,7 @@ public class NewPostActivity extends BaseActivity {
     private Spinner spinner3;
     private EditText mPriceField;
     private EditText mDateField;
+    private ImageButton mScheduleButton;
     private boolean isRequested;
     private FirebaseUser firebaseUser;
 
@@ -127,8 +129,11 @@ public class NewPostActivity extends BaseActivity {
         mBodyField = (EditText) findViewById(R.id.field_body);
         mPriceField = (EditText) findViewById(R.id.field_price);
         mDateField = (EditText) findViewById(R.id.field_date);
+        mScheduleButton = (ImageButton) findViewById(R.id.schedule_button);
 
 
+        isRequested = false;
+        mDateField.setEnabled(false);
         findViewById(R.id.fab_submit_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
